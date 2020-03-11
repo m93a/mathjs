@@ -42,21 +42,18 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
   return typed(name, {
 
     'SparseMatrix, Array | Matrix': function (m, b) {
-      // process matrix
       return _sparseForwardSubstitution(m, b)
     },
 
     'DenseMatrix, Array | Matrix': function (m, b) {
-      // process matrix
       return _denseForwardSubstitution(m, b)
     },
 
     'Array, Array | Matrix': function (a, b) {
-      // create dense matrix from array
       const m = matrix(a)
-      // use matrix implementation
       const r = _denseForwardSubstitution(m, b)
-      // result
+
+      // convert result to array
       return r.valueOf()
     }
   })
@@ -64,116 +61,108 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
   function _denseForwardSubstitution (m, b) {
     // validate matrix and vector, return copy of column vector b
     b = solveValidation(m, b, true)
-    // column vector data
     const bdata = b._data
-    // rows & columns
-    const rows = m._size[0]
-    const columns = m._size[1]
+
+    const mdata = m._data
+    const rowCount = m._size[0]
+    const columnCount = m._size[1]
+
     // result
     const x = []
-    // data
-    const data = m._data
-    // forward solve m * x = b, loop columns
-    for (let j = 0; j < columns; j++) {
-      // b[j]
+
+    // loop columns
+    for (let j = 0; j < columnCount; j++) {
       const bj = bdata[j][0] || 0
-      // x[j]
       let xj
-      // forward substitution (outer product) avoids inner looping when bj === 0
+
       if (!equalScalar(bj, 0)) {
-        // value @ [j, j]
-        const vjj = data[j][j]
-        // check vjj
-        if (equalScalar(vjj, 0)) {
-          // system cannot be solved
+        const mjj = mdata[j][j]
+
+        if (equalScalar(mjj, 0)) {
           throw new Error('Linear system cannot be solved since matrix is singular')
         }
-        // calculate xj
-        xj = divideScalar(bj, vjj)
+
+        xj = divideScalar(bj, mjj)
+
         // loop rows
-        for (let i = j + 1; i < rows; i++) {
+        for (let i = j + 1; i < rowCount; i++) {
           // update copy of b
-          bdata[i] = [subtract(bdata[i][0] || 0, multiplyScalar(xj, data[i][j]))]
+          bdata[i] = [subtract(bdata[i][0] || 0, multiplyScalar(xj, mdata[i][j]))]
         }
       } else {
-        // zero @ j
+        // !FIXME don't throw solutions away
         xj = 0
       }
-      // update x
+
       x[j] = [xj]
     }
-    // return vector
+
+    // return column vector
     return new DenseMatrix({
       data: x,
-      size: [rows, 1]
+      size: [rowCount, 1]
     })
   }
 
   function _sparseForwardSubstitution (m, b) {
     // validate matrix and vector, return copy of column vector b
     b = solveValidation(m, b, true)
-    // column vector data
     const bdata = b._data
-    // rows & columns
+
+    const mvalues = m._values
     const rows = m._size[0]
     const columns = m._size[1]
-    // matrix arrays
-    const values = m._values
+
     const index = m._index
     const ptr = m._ptr
-    // vars
+
     let i, k
+
     // result
     const x = []
-    // forward solve m * x = b, loop columns
+
     for (let j = 0; j < columns; j++) {
-      // b[j]
       const bj = bdata[j][0] || 0
-      // forward substitution (outer product) avoids inner looping when bj === 0
+
       if (!equalScalar(bj, 0)) {
-        // value @ [j, j]
-        let vjj = 0
-        // lower triangular matrix values & index (column j)
+        let mjj = 0
+
+        // values and indices in j-th column
         const jvalues = []
         const jindex = []
-        // last index in column
-        let l = ptr[j + 1]
-        // values in column, find value @ [j, j]
-        for (k = ptr[j]; k < l; k++) {
-          // row
-          i = index[k]
-          // check row (rows are not sorted!)
+
+        const firstIndex = ptr[j]
+        const lastIndex = ptr[j + 1]
+
+        for (k = firstIndex; k < lastIndex; k++) {
+          let i = index[k]
           if (i === j) {
-            // update vjj
-            vjj = values[k]
+            mjj = mvalues[k]
           } else if (i > j) {
-            // store lower triangular
-            jvalues.push(values[k])
+            jvalues.push(mvalues[k])
             jindex.push(i)
           }
         }
-        // at this point we must have a value @ [j, j]
-        if (equalScalar(vjj, 0)) {
-          // system cannot be solved, there is no value @ [j, j]
+
+        if (equalScalar(mjj, 0)) {
           throw new Error('Linear system cannot be solved since matrix is singular')
         }
-        // calculate xj
-        const xj = divideScalar(bj, vjj)
-        // loop lower triangular
-        for (k = 0, l = jindex.length; k < l; k++) {
-          // row
-          i = jindex[k]
+
+        const xj = divideScalar(bj, mjj)
+
+        for (k = 0; k < jindex.length; k++) {
           // update copy of b
+          const i = jindex[k]
           bdata[i] = [subtract(bdata[i][0] || 0, multiplyScalar(xj, jvalues[k]))]
         }
-        // update x
+
         x[j] = [xj]
       } else {
-        // update x
+        // !FIXME don't throw away solutions
         x[j] = [0]
       }
     }
-    // return vector
+    // return column vector
     return new DenseMatrix({
       data: x,
       size: [rows, 1]
