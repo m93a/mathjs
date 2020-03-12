@@ -34,10 +34,10 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
    *
    *    lup, slu, usolve, lusolve
    *
-   * @param {Matrix, Array} L       A N x N matrix or array (L)
-   * @param {Matrix, Array} b       A column vector with the b values
+   * @param {Matrix, Array} L lower-triangular N×N matrix or array
+   * @param {Matrix, Array} [b] column vector with the RHS values, by default a null vector
    *
-   * @return {DenseMatrix | Array}  A column vector with the linear system solution (x)
+   * @return {DenseMatrix | Array} column vector with the linear system solution (x)
    */
   return typed(name, {
 
@@ -116,8 +116,6 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
     const index = m._index
     const ptr = m._ptr
 
-    let i, k
-
     // result
     const x = []
 
@@ -134,8 +132,8 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
         const firstIndex = ptr[j]
         const lastIndex = ptr[j + 1]
 
-        for (k = firstIndex; k < lastIndex; k++) {
-          let i = index[k]
+        for (let k = firstIndex; k < lastIndex; k++) {
+          const i = index[k]
           if (i === j) {
             mjj = mvalues[k]
           } else if (i > j) {
@@ -150,7 +148,7 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
 
         const xj = divideScalar(bj, mjj)
 
-        for (k = 0; k < jindex.length; k++) {
+        for (let k = 0; k < jindex.length; k++) {
           // update copy of b
           const i = jindex[k]
           bdata[i] = [subtract(bdata[i][0] || 0, multiplyScalar(xj, jvalues[k]))]

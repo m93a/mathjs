@@ -34,10 +34,10 @@ export const createUsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
    *
    *    lup, slu, usolve, lusolve
    *
-   * @param {Matrix, Array} U       A N x N matrix or array (U)
-   * @param {Matrix, Array} b       A column vector with the b values
+   * @param {Matrix, Array} U upper-triangular N×N matrix or array
+   * @param {Matrix, Array} [b] column vector with the RHS values, by default a null vector
    *
-   * @return {DenseMatrix | Array}  A column vector with the linear system solution (x)
+   * @return {DenseMatrix | Array} column vector with the linear system solution (x)
    */
   return typed(name, {
 
@@ -138,7 +138,7 @@ export const createUsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
         const lastIndex = ptr[j + 1]
 
         for (let k = lastIndex - 1; k >= firstIndex; k--) {
-          let i = index[k]
+          const i = index[k]
           if (i === j) {
             mjj = mvalues[k]
           } else if (i < j) {
