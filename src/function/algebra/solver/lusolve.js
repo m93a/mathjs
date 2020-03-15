@@ -94,7 +94,7 @@ export const createLusolve = /* #__PURE__ */ factory(name, dependencies, ({ type
     b = solveValidation(l, b, false)
 
     // apply row permutations if needed (b is a DenseMatrix)
-    if (p) { b._data = csIpvec(p, b._data) }
+    if (p) { b = csIpvec(p, b) }
 
     const y = lsolve(l, b)
     const x = usolve(u, y)

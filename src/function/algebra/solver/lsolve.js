@@ -61,7 +61,6 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
   function _denseForwardSubstitution (m, b) {
     // validate matrix and vector, return copy of column vector b
     b = solveValidation(m, b, true)
-    const bdata = b._data
 
     const mdata = m._data
     const rowCount = m._size[0]
@@ -72,7 +71,7 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
 
     // loop columns
     for (let j = 0; j < columnCount; j++) {
-      const bj = bdata[j][0] || 0
+      const bj = b[j][0] || 0
       let xj
 
       if (!equalScalar(bj, 0)) {
@@ -87,7 +86,7 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
         // loop rows
         for (let i = j + 1; i < rowCount; i++) {
           // update copy of b
-          bdata[i] = [subtract(bdata[i][0] || 0, multiplyScalar(xj, mdata[i][j]))]
+          b[i] = [subtract(b[i][0] || 0, multiplyScalar(xj, mdata[i][j]))]
         }
       } else {
         // !FIXME don't throw solutions away
@@ -107,7 +106,6 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
   function _sparseForwardSubstitution (m, b) {
     // validate matrix and vector, return copy of column vector b
     b = solveValidation(m, b, true)
-    const bdata = b._data
 
     const mvalues = m._values
     const rows = m._size[0]
@@ -120,7 +118,7 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
     const x = []
 
     for (let j = 0; j < columns; j++) {
-      const bj = bdata[j][0] || 0
+      const bj = b[j][0] || 0
 
       if (!equalScalar(bj, 0)) {
         let mjj = 0
@@ -151,7 +149,7 @@ export const createLsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
         for (let k = 0; k < jindex.length; k++) {
           // update copy of b
           const i = jindex[k]
-          bdata[i] = [subtract(bdata[i][0] || 0, multiplyScalar(xj, jvalues[k]))]
+          b[i] = [subtract(b[i][0] || 0, multiplyScalar(xj, jvalues[k]))]
         }
 
         x[j] = [xj]

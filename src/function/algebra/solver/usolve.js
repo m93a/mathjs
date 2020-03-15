@@ -60,58 +60,63 @@ export const createUsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
 
   /**
    * @param {Matrix} m
-   * @param {Matrix} b
+   * @param {number[]} b
    */
   function _denseBackwardSubstitution (m, b) {
-    // validate matrix and vector, return copy of column vector b
+    // validate matrix and vector, return copy of 1-dim array b
     b = solveValidation(m, b, true)
-    const bdata = b._data
+
+    // solutions and their modified RHSs
+    const bs = [b]
+    const xs = [[]]
 
     const mdata = m._data
     const rowCount = m._size[0]
     const columnCount = m._size[1]
 
-    // result
-    const x = []
-
     // loop columns
-    for (let j = columnCount - 1; j >= 0; j--) {
-      const bj = bdata[j][0] || 0
-      let xj
+    for (let i = columnCount - 1; i >= 0; i--) {
+      // loop solutions
+      for (let j = 0; j < bs.length; j++) {
+        const pivotElement = mdata[i][i]
+        const bji = bs[j][i]
+        let xji
 
-      if (!equalScalar(bj, 0)) {
-        const mjj = mdata[j][j]
+        if (!equalScalar(bji, 0)) {
+          if (equalScalar(pivotElement, 0)) {
+            // no solution for a singular matrix
+            return []
+          }
 
-        if (equalScalar(mjj, 0)) {
-          throw new Error('Linear system cannot be solved since matrix is singular')
+          xji = divideScalar(bji, pivotElement)
+        } else {
+          if (j === 0 && equalScalar(pivotElement, 0)) {
+            // two solutions
+            xji = 1 // TODO numerical stability?
+            xs.push( xs[j].slice(0) ) // clone xj
+            bs.push( bs[j].slice(0) ) // clone bj
+          } else {
+            // only take one solution, the second one is already
+            // an affine combination of existing solutions
+            xji = 0
+          }
         }
-
-        xj = divideScalar(bj, mjj)
 
         // loop rows
-        for (let i = j - 1; i >= 0; i--) {
-          // update copy of b
-          bdata[i] = [subtract(bdata[i][0] || 0, multiplyScalar(xj, mdata[i][j]))]
+        for (let k = i - 1; k >= 0; k--) {
+          bs[j][k] = subtract(bs[j][k] || 0, multiplyScalar(xji, mdata[k][i]))
         }
-      } else {
-        // !FIXME don't throw solutions away
-        xj = 0
-      }
 
-      x[j] = [xj]
+        xs[j][i] = xji
+      }
     }
 
-    // return column vector
-    return new DenseMatrix({
-      data: x,
-      size: [rowCount, 1]
-    })
+    return xs
   }
 
   function _sparseBackwardSubstitution (m, b) {
     // validate matrix and vector, return copy of column vector b
     b = solveValidation(m, b, true)
-    const bdata = b._data
 
     const mvalues = m._values
     const rowCount = m._size[0]
@@ -124,7 +129,7 @@ export const createUsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
     const x = []
 
     for (let j = columnCount - 1; j >= 0; j--) {
-      const bj = bdata[j][0] || 0
+      const bj = b[j]
 
       if (!equalScalar(bj, 0)) {
         // the actual value is yet to be found
@@ -156,7 +161,7 @@ export const createUsolve = /* #__PURE__ */ factory(name, dependencies, ({ typed
         for (let k = 0; k < jindex.length; k++) {
           // update copy of b
           const i = jindex[k]
-          bdata[i] = [subtract(bdata[i][0], multiplyScalar(xj, jvalues[k]))]
+          b[i] = [subtract(b[i][0], multiplyScalar(xj, jvalues[k]))]
         }
 
         x[j] = [xj]
