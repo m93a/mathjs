@@ -71,9 +71,4 @@ describe('map', function () {
   it('should throw an error if called with invalid number of arguments', function () {
     assert.throws(function () { math.map([1, 2, 3]) })
   })
-
-  it('should LaTeX map', function () {
-    const expression = math.parse('map([1,2,3],callback)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{map}\\left(\\begin{bmatrix}1\\\\2\\\\3\\\\\\end{bmatrix}, callback\\right)')
-  })
 })

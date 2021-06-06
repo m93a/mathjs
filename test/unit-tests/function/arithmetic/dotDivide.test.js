@@ -151,9 +151,4 @@ describe('dotDivide', function () {
       assert.throws(function () { dotDivide(math.sparse([[1, 2], [3, 4]]), math.sparse([[1]])) })
     })
   })
-
-  it('should LaTeX dotDivide', function () {
-    const expression = math.parse('dotDivide([1,2],[3,4])')
-    assert.strictEqual(expression.toTex(), '\\left(\\begin{bmatrix}1\\\\2\\\\\\end{bmatrix}.:\\begin{bmatrix}3\\\\4\\\\\\end{bmatrix}\\right)')
-  })
 })

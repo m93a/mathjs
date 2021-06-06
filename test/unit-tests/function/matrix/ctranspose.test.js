@@ -154,9 +154,4 @@ describe('ctranspose', function () {
       assert.throws(function () { ctranspose(m) })
     })
   })
-
-  it('should LaTeX transpose', function () {
-    const expression = math.parse('ctranspose([[1+2i,3+4i],[5+6i,7+8i]])')
-    assert.strictEqual(expression.toTex(), '\\left(\\begin{bmatrix}1+2~ i&3+4~ i\\\\5+6~ i&7+8~ i\\\\\\end{bmatrix}\\right)^H')
-  })
 })

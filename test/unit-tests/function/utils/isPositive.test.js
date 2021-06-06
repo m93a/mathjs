@@ -4,7 +4,6 @@ const isPositive = math.isPositive
 const bignumber = math.bignumber
 const fraction = math.fraction
 const complex = math.complex
-const unit = math.unit
 
 describe('isPositive', function () {
   it('should test whether a number is positive', function () {

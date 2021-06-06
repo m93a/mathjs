@@ -47,9 +47,4 @@ describe('hypot', function () {
     assert.throws(function () { hypot([2, 3, math.complex()]) }, /TypeError: Unexpected type of argument/)
     assert.throws(function () { hypot(undefined) }, /TypeError: Unexpected type of argument/)
   })
-
-  it('should LaTeX hypot', function () {
-    const expression = math.parse('hypot(3,4)')
-    assert.strictEqual(expression.toTex(), '\\hypot\\left(3,4\\right)')
-  })
 })

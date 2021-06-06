@@ -5,7 +5,6 @@ import approx from '../../../../tools/approx.js'
 import math from '../../../../src/defaultInstance.js'
 const bignumber = math.bignumber
 const fraction = math.fraction
-const complex = math.complex
 
 describe('sign', function () {
   it('should calculate the sign of a boolean', function () {
@@ -72,10 +71,5 @@ describe('sign', function () {
 
   it('should throw an in case of wrong type of arguments', function () {
     assert.throws(function () { math.sign(null) }, /TypeError: Unexpected type of argument/)
-  })
-
-  it('should LaTeX sign', function () {
-    const expression = math.parse('sign(-4)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{sign}\\left(-4\\right)')
   })
 })

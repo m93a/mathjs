@@ -70,9 +70,4 @@ describe('zeros', function () {
   })
 
   // TODO: test with invalid input
-
-  it('should LaTeX zeros', function () {
-    const expression = math.parse('zeros(2,3)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{zeros}\\left(2,3\\right)')
-  })
 })

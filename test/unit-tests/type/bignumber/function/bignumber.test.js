@@ -98,12 +98,4 @@ describe('bignumber', function () {
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { math.bignumber(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX bignumber', function () {
-    const expr1 = math.parse('bignumber()')
-    const expr2 = math.parse('bignumber(1)')
-
-    assert.strictEqual(expr1.toTex(), '0')
-    assert.strictEqual(expr2.toTex(), '\\left(1\\right)')
-  })
 })

@@ -183,9 +183,4 @@ describe('largerEq', function () {
   it('should throw an error in case of invalid type of arguments', function () {
     assert.throws(function () { largerEq(2, null) }, /TypeError: Unexpected type of argument/)
   })
-
-  it('should LaTeX largerEq', function () {
-    const expression = math.parse('largerEq(1,2)')
-    assert.strictEqual(expression.toTex(), '\\left(1\\geq2\\right)')
-  })
 })

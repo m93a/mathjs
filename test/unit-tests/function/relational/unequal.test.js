@@ -227,9 +227,4 @@ describe('unequal', function () {
     assert.throws(function () { unequal(1) }, /TypeError: Too few arguments/)
     assert.throws(function () { unequal(1, 2, 3) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX unequal', function () {
-    const expression = math.parse('unequal(1,0)')
-    assert.strictEqual(expression.toTex(), '\\left(1\\neq0\\right)')
-  })
 })

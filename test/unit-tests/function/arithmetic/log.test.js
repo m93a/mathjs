@@ -108,12 +108,4 @@ describe('log', function () {
     approx.deepEqual(log(matrix([[1, 2], [3, 4]])),
       matrix([[0, 0.693147180559945], [1.098612288668110, 1.386294361119891]]))
   })
-
-  it('should LaTeX log', function () {
-    const expr1 = math.parse('log(e)')
-    const expr2 = math.parse('log(32,2)')
-
-    assert.strictEqual(expr1.toTex(), '\\ln\\left( e\\right)')
-    assert.strictEqual(expr2.toTex(), '\\log_{2}\\left(32\\right)')
-  })
 })

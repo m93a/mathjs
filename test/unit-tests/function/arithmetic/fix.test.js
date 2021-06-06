@@ -214,9 +214,4 @@ describe('fix', function () {
     assert.throws(function () { fix(null) }, /TypeError: Unexpected type of argument/)
     assert.throws(function () { fix(1, null) }, /TypeError: Unexpected type of argument/)
   })
-
-  it('should LaTeX fix', function () {
-    const expression = math.parse('fix(0.6)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{fix}\\left(0.6\\right)')
-  })
 })

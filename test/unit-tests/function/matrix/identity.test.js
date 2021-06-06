@@ -62,9 +62,4 @@ describe('identity', function () {
     assert.throws(function () { identity([-2, 2]) })
     assert.throws(function () { identity([2, -2]) })
   })
-
-  it('should LaTeX identity', function () {
-    const expression = math.parse('identity(2)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{identity}\\left(2\\right)')
-  })
 })

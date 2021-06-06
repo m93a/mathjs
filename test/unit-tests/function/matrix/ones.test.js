@@ -69,9 +69,4 @@ describe('ones', function () {
   })
 
   // TODO: test with invalid input
-
-  it('should LaTeX ones', function () {
-    const expression = math.parse('ones(2)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{ones}\\left(2\\right)')
-  })
 })

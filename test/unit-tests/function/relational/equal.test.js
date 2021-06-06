@@ -6,7 +6,6 @@ const bignumber = math.bignumber
 const complex = math.complex
 const matrix = math.matrix
 const sparse = math.sparse
-const unit = math.unit
 const equal = math.equal
 
 describe('equal', function () {
@@ -215,10 +214,5 @@ describe('equal', function () {
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { equal(1) }, /Too few arguments/)
     assert.throws(function () { equal(1, 2, 3) }, /Too many arguments/)
-  })
-
-  it('should LaTeX equal', function () {
-    const expression = math.parse('equal(1,2)')
-    assert.strictEqual(expression.toTex(), '\\left(1=2\\right)')
   })
 })

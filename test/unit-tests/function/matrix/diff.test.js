@@ -1,5 +1,4 @@
 import assert from 'assert'
-import approx from '../../../../tools/approx.js'
 import math from '../../../../src/defaultInstance.js'
 
 // Parsing tests are inside diff.transform.test

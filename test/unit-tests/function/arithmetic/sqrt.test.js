@@ -83,9 +83,4 @@ describe('sqrt', function () {
   it('should throw an in case of wrong type of arguments', function () {
     assert.throws(function () { sqrt(null) }, /TypeError: Unexpected type of argument/)
   })
-
-  it('should LaTeX sqrt', function () {
-    const expression = math.parse('sqrt(2)')
-    assert.strictEqual(expression.toTex(), '\\sqrt{2}')
-  })
 })

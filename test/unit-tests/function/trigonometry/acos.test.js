@@ -105,9 +105,4 @@ describe('acos', function () {
     assert.throws(function () { acos() }, /TypeError: Too few arguments/)
     assert.throws(function () { acos(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX acos', function () {
-    const expression = math.parse('acos(1)')
-    assert.strictEqual(expression.toTex(), '\\cos^{-1}\\left(1\\right)')
-  })
 })

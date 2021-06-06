@@ -61,9 +61,4 @@ describe('arg', function () {
     assert.throws(function () { arg() }, /TypeError: Too few arguments/)
     assert.throws(function () { arg(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX arg', function () {
-    const expression = math.parse('arg(1+i)')
-    assert.strictEqual(expression.toTex(), '\\arg\\left(1+ i\\right)')
-  })
 })

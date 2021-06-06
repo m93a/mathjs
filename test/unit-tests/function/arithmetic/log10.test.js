@@ -104,9 +104,4 @@ describe('log10', function () {
     approx.deepEqual(log10(matrix([[1, 2], [3, 4]])),
       matrix([[0, 0.301029995663981], [0.477121254719662, 0.602059991327962]]))
   })
-
-  it('should LaTeX log10', function () {
-    const expression = math.parse('log10(10)')
-    assert.strictEqual(expression.toTex(), '\\log_{10}\\left(10\\right)')
-  })
 })

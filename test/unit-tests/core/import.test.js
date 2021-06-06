@@ -357,9 +357,4 @@ describe('import', function () {
   it.skip('should import an Array', function () {
     // TODO: unit test importing an Array containing stuff
   })
-
-  it('should LaTeX import', function () {
-    const expression = math.parse('import(object)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{import}\\left( object\\right)')
-  })
 })

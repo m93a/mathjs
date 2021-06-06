@@ -163,9 +163,4 @@ describe('subset', function () {
     // assert.throws(function () {subset(new Date(), index(0))}, /TypeError: Unexpected type of argument/) // FIXME: should fail too. Problem is, Date is also an Object
     // assert.throws(function () {subset(/foo/, index(0))}, /TypeError: Unexpected type of argument/) // FIXME: should fail too. Problem is, Date is also an Object
   })
-
-  it('should LaTeX subset', function () {
-    const expression = math.parse('subset([1],index(0,0))')
-    assert.strictEqual(expression.toTex(), '\\mathrm{subset}\\left(\\begin{bmatrix}1\\\\\\end{bmatrix},\\mathrm{index}\\left(0,0\\right)\\right)')
-  })
 })

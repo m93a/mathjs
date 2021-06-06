@@ -131,9 +131,4 @@ describe('asin', function () {
     assert.throws(function () { asin() }, /TypeError: Too few arguments/)
     assert.throws(function () { asin(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX asin', function () {
-    const expression = math.parse('asin(0.5)')
-    assert.strictEqual(expression.toTex(), '\\sin^{-1}\\left(0.5\\right)')
-  })
 })

@@ -42,12 +42,4 @@ describe('sparse', function () {
   it('should throw an error if called with too many arguments', function () {
     assert.throws(function () { sparse([], 3, 3) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX matrix', function () {
-    const expr1 = math.parse('sparse()')
-    const expr2 = math.parse('sparse([1])')
-
-    assert.strictEqual(expr1.toTex(), '\\begin{bsparse}\\end{bsparse}')
-    assert.strictEqual(expr2.toTex(), '\\left(\\begin{bmatrix}1\\\\\\end{bmatrix}\\right)')
-  })
 })

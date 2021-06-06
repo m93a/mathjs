@@ -6,7 +6,6 @@ const bignumber = math.bignumber
 const complex = math.complex
 const matrix = math.matrix
 const sparse = math.sparse
-const unit = math.unit
 const larger = math.larger
 
 describe('larger', function () {
@@ -179,10 +178,5 @@ describe('larger', function () {
 
   it('should throw an error in case of invalid type of arguments', function () {
     assert.throws(function () { larger(2, null) }, /TypeError: Unexpected type of argument/)
-  })
-
-  it('should LaTeX larger', function () {
-    const expression = math.parse('larger(1,2)')
-    assert.strictEqual(expression.toTex(), '\\left(1>2\\right)')
   })
 })

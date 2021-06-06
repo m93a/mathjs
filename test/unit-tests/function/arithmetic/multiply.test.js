@@ -9,7 +9,6 @@ const matrix = math.matrix
 const complex = math.complex
 const bignumber = math.bignumber
 const i = math.i
-const unit = math.unit
 
 describe('multiply', function () {
   describe('Scalar', function () {
@@ -797,10 +796,5 @@ describe('multiply', function () {
       assert.deepStrictEqual(multiply(math.matrix([[2, 2], [2, 2]]), math.matrix([[3, 3], [3, 3]]), 4), math.matrix([[48, 48], [48, 48]]))
       assert.deepStrictEqual(multiply(math.matrix([[2, 2], [2, 2]]), 3, 4), math.matrix([[24, 24], [24, 24]]))
     })
-  })
-
-  it('should LaTeX multiply', function () {
-    const expression = math.parse('multiply(2,3)')
-    assert.strictEqual(expression.toTex(), '\\left(2\\cdot3\\right)')
   })
 })

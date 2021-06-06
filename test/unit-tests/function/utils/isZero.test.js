@@ -4,7 +4,6 @@ const isZero = math.isZero
 const bignumber = math.bignumber
 const fraction = math.fraction
 const complex = math.complex
-const unit = math.unit
 
 describe('isZero', function () {
   it('should test whether a number is zero', function () {

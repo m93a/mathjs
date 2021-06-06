@@ -98,9 +98,4 @@ describe('log2', function () {
     approx.deepEqual(log2(matrix([[1, 2], [3, 4]])),
       matrix([[0, 1], [1.584962500721156, 2]]))
   })
-
-  it('should LaTeX log2', function () {
-    const expression = math.parse('log2(10)')
-    assert.strictEqual(expression.toTex(), '\\log_{2}\\left(10\\right)')
-  })
 })

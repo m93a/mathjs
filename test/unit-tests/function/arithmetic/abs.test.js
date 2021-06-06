@@ -1,6 +1,6 @@
 import assert from 'assert'
 import math from '../../../../src/defaultInstance.js'
-const { abs, bignumber, complex, fraction, matrix, Matrix, unit, parse } = math
+const { abs, bignumber, complex, fraction, matrix, Matrix } = math
 
 describe('abs', function () {
   it('should return the abs value of a boolean', function () {
@@ -82,10 +82,5 @@ describe('abs', function () {
     assert.throws(function () { abs(new Date()) }, /TypeError: Unexpected type of argument/)
     assert.throws(function () { abs(null) }, /TypeError: Unexpected type of argument/)
     assert.throws(function () { abs(undefined) }, /TypeError: Unexpected type of argument/)
-  })
-
-  it('should LaTeX abs', function () {
-    const expression = parse('abs(-1)')
-    assert.strictEqual(expression.toTex(), '\\left|-1\\right|')
   })
 })

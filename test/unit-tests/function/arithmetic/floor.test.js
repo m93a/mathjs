@@ -212,9 +212,4 @@ describe('floor', function () {
     assert.throws(function () { floor(2.5, -2) }, Error, ' Number of decimals in function round must be in the range of 0-15')
     assert.throws(function () { floor(2.5, Infinity) }, Error, ' Number of decimals in function round must be in the range of 0-15')
   })
-
-  it('should LaTeX floor', function () {
-    const expression = math.parse('floor(0.6)')
-    assert.strictEqual(expression.toTex(), '\\left\\lfloor0.6\\right\\rfloor')
-  })
 })

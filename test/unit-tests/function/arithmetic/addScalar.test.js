@@ -1,7 +1,6 @@
 // test add
 import assert from 'assert'
 
-import approx from '../../../../tools/approx.js'
 import math from '../../../../src/defaultInstance.js'
 import BigNumber from 'decimal.js'
 const add = math.add
@@ -113,10 +112,5 @@ describe('addScalar', function () {
 
   it('should throw an error in case of invalid type of arguments', function () {
     assert.throws(function () { add(null, 1) }, /TypeError: Unexpected type of argument/)
-  })
-
-  it('should LaTeX add', function () {
-    const expression = math.parse('add(1,2)')
-    assert.strictEqual(expression.toTex(), '\\left(1+2\\right)')
   })
 })

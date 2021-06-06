@@ -6,7 +6,6 @@ const bignumber = math.bignumber
 const complex = math.complex
 const matrix = math.matrix
 const sparse = math.sparse
-const unit = math.unit
 const smaller = math.smaller
 
 describe('smaller', function () {
@@ -188,10 +187,5 @@ describe('smaller', function () {
 
   it('should throw an error in case of invalid type of arguments', function () {
     assert.throws(function () { smaller(2, null) }, /TypeError: Unexpected type of argument/)
-  })
-
-  it('should LaTeX smaller', function () {
-    const expression = math.parse('smaller(1,2)')
-    assert.strictEqual(expression.toTex(), '\\left(1<2\\right)')
   })
 })

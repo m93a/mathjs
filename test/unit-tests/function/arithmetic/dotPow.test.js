@@ -164,9 +164,4 @@ describe('dotPow', function () {
       approx.deepEqual(dotPow(sparse([[1, 2, 0], [0, 1, 4]]), sparse([[2, 1, 0], [4, 1, 0]])), matrix([[1, 2, 1], [0, 1, 1]]))
     })
   })
-
-  it('should LaTeX dotPow', function () {
-    const expression = math.parse('dotPow([1,2],[3,4])')
-    assert.strictEqual(expression.toTex(), '\\left(\\begin{bmatrix}1\\\\2\\\\\\end{bmatrix}.^\\wedge\\begin{bmatrix}3\\\\4\\\\\\end{bmatrix}\\right)')
-  })
 })

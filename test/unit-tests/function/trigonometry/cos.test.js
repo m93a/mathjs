@@ -98,9 +98,4 @@ describe('cos', function () {
     assert.throws(function () { cos() }, /TypeError: Too few arguments/)
     assert.throws(function () { cos(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX cos', function () {
-    const expression = math.parse('cos(1)')
-    assert.strictEqual(expression.toTex(), '\\cos\\left(1\\right)')
-  })
 })

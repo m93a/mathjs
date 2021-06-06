@@ -30,9 +30,4 @@ describe('re', function () {
     assert.throws(function () { math.re() }, /TypeError: Too few arguments/)
     assert.throws(function () { math.re(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX re', function () {
-    const expression = math.parse('re(1+i)')
-    assert.strictEqual(expression.toTex(), '\\Re\\left\\lbrace1+ i\\right\\rbrace')
-  })
 })

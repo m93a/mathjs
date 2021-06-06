@@ -78,14 +78,4 @@ describe('numeric', function () {
   it('should throw an error if called with a complex number', function () {
     assert.throws(function () { numeric(math.complex(2, 3), 'number') }, TypeError)
   })
-
-  it('should LaTeX numeric', function () {
-    const expr1 = math.parse('numeric(3.14, "number")')
-    const expr2 = math.parse('numeric("3.141592653589793238462643383279501", "BigNumber")')
-    const expr3 = math.parse('numeric(22/7, "Fraction")')
-
-    assert.strictEqual(expr1.toTex(), '3.14')
-    assert.strictEqual(expr2.toTex(), '\\mathtt{"3.141592653589793238462643383279501"}')
-    assert.strictEqual(expr3.toTex(), '\\frac{22}{7}')
-  })
 })

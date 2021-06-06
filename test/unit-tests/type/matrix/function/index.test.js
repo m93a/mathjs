@@ -24,14 +24,4 @@ describe('index', function () {
     assert.ok(index instanceof math.Index)
     assert.deepStrictEqual(index._dimensions, [new Range(2, 6, 1), new ImmutableDenseMatrix([3])])
   })
-
-  it('should LaTeX index', function () {
-    const expr1 = math.parse('index(1)')
-    const expr2 = math.parse('index(1,2)')
-    const expr3 = math.parse('index(1,2,3)')
-
-    assert.strictEqual(expr1.toTex(), '\\mathrm{index}\\left(1\\right)')
-    assert.strictEqual(expr2.toTex(), '\\mathrm{index}\\left(1,2\\right)')
-    assert.strictEqual(expr3.toTex(), '\\mathrm{index}\\left(1,2,3\\right)')
-  })
 })

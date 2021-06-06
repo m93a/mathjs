@@ -71,9 +71,4 @@ describe('clone', function () {
     a.valueOf()[2].re = 5
     assert.strictEqual(b.valueOf()[2].re, 2)
   })
-
-  it('should LaTeX clone', function () {
-    const expression = math.parse('clone(1)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{clone}\\left(1\\right)')
-  })
 })

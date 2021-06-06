@@ -78,14 +78,4 @@ describe('complex', function () {
   it('should throw an error if called with more than 2 arguments', function () {
     assert.throws(function () { complex(2, 3, 4) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX complex', function () {
-    const expr1 = math.parse('complex()')
-    const expr2 = math.parse('complex(1)')
-    const expr3 = math.parse('complex(1,2)')
-
-    assert.strictEqual(expr1.toTex(), '0')
-    assert.strictEqual(expr2.toTex(), '\\left(1\\right)')
-    assert.strictEqual(expr3.toTex(), '\\left(\\left(1\\right)+i\\cdot\\left(2\\right)\\right)')
-  })
 })

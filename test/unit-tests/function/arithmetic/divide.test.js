@@ -148,9 +148,4 @@ describe('divide', function () {
   it('should throw an in case of wrong type of arguments', function () {
     assert.throws(function () { divide(null, 2) }, /TypeError: Unexpected type of argument/)
   })
-
-  it('should LaTeX divide', function () {
-    const expression = math.parse('divide(1,2)')
-    assert.strictEqual(expression.toTex(), '\\frac{1}{2}')
-  })
 })

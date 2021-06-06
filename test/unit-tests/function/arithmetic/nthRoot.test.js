@@ -185,9 +185,4 @@ describe('nthRoot', function () {
       approx.deepEqual(nthRoot(sparse([[64, 3125], [0, -1]]), sparse([[3, 5], [1, 3]])), sparse([[4, 5], [0, -1]]))
     })
   })
-
-  it('should LaTeX nthRoot', function () {
-    const expression = math.parse('nthRoot(8,3)')
-    assert.strictEqual(expression.toTex(), '\\sqrt[3]{8}')
-  })
 })

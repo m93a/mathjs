@@ -72,9 +72,4 @@ describe('forEach', function () {
   it('should throw an error if called with invalid number of arguments', function () {
     assert.throws(function () { math.forEach([1, 2, 3]) })
   })
-
-  it('should LaTeX forEach', function () {
-    const expression = math.parse('forEach([1,2,3],callback)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{forEach}\\left(\\begin{bmatrix}1\\\\2\\\\3\\\\\\end{bmatrix}, callback\\right)')
-  })
 })

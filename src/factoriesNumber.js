@@ -15,10 +15,6 @@ import {
   atan2Number,
   atanhNumber,
   atanNumber,
-  bitAndNumber,
-  bitNotNumber,
-  bitOrNumber,
-  bitXorNumber,
   cbrtNumber,
   ceilNumber,
   combinationsNumber,
@@ -42,7 +38,6 @@ import {
   isPositiveNumber,
   isZeroNumber,
   lcmNumber,
-  leftShiftNumber,
   log10Number,
   log1pNumber,
   log2Number,
@@ -53,8 +48,6 @@ import {
   notNumber,
   orNumber,
   powNumber,
-  rightArithShiftNumber,
-  rightLogShiftNumber,
   sechNumber,
   secNumber,
   signNumber,
@@ -83,13 +76,6 @@ export { createTyped } from './core/function/typed.js'
 // classes
 export { createResultSet } from './type/resultset/ResultSet.js'
 export { createRangeClass } from './type/matrix/Range.js'
-export { createHelpClass } from './expression/Help.js'
-export { createHelp } from './expression/function/help.js'
-
-// algebra
-export { createSimplify } from './function/algebra/simplify.js'
-export { createDerivative } from './function/algebra/derivative.js'
-export { createRationalize } from './function/algebra/rationalize.js'
 
 // arithmetic
 export const createUnaryMinus = /* #__PURE__ */ createNumberFactory('unaryMinus', unaryMinusNumber)
@@ -126,15 +112,6 @@ export { createHypot } from './function/arithmetic/hypot.js'
 export const createNorm = /* #__PURE__ */ createNumberFactory('norm', normNumber)
 export const createDivide = /* #__PURE__ */ createNumberFactory('divide', divideNumber)
 
-// bitwise
-export const createBitAnd = /* #__PURE__ */ createNumberFactory('bitAnd', bitAndNumber)
-export const createBitNot = /* #__PURE__ */ createNumberFactory('bitNot', bitNotNumber)
-export const createBitOr = /* #__PURE__ */ createNumberFactory('bitOr', bitOrNumber)
-export const createBitXor = /* #__PURE__ */ createNumberFactory('bitXor', bitXorNumber)
-export const createLeftShift = /* #__PURE__ */ createNumberFactory('leftShift', leftShiftNumber)
-export const createRightArithShift = /* #__PURE__ */ createNumberFactory('rightArithShift', rightArithShiftNumber)
-export const createRightLogShift = /* #__PURE__ */ createNumberFactory('rightLogShift', rightLogShiftNumber)
-
 // constants
 export {
   createE,
@@ -162,29 +139,6 @@ export {
 export { createNumber } from './type/number.js'
 export { createString } from './type/string.js'
 export { createBoolean } from './type/boolean.js'
-export { createParser } from './expression/function/parser.js'
-
-// expression
-export { createNode } from './expression/node/Node.js'
-export { createAccessorNode } from './expression/node/AccessorNode.js'
-export { createArrayNode } from './expression/node/ArrayNode.js'
-export { createAssignmentNode } from './expression/node/AssignmentNode.js'
-export { createBlockNode } from './expression/node/BlockNode.js'
-export { createConditionalNode } from './expression/node/ConditionalNode.js'
-export { createConstantNode } from './expression/node/ConstantNode.js'
-export { createFunctionAssignmentNode } from './expression/node/FunctionAssignmentNode.js'
-export { createIndexNode } from './expression/node/IndexNode.js'
-export { createObjectNode } from './expression/node/ObjectNode.js'
-export { createOperatorNode } from './expression/node/OperatorNode.js'
-export { createParenthesisNode } from './expression/node/ParenthesisNode.js'
-export { createRangeNode } from './expression/node/RangeNode.js'
-export { createRelationalNode } from './expression/node/RelationalNode.js'
-export { createSymbolNode } from './expression/node/SymbolNode.js'
-export { createFunctionNode } from './expression/node/FunctionNode.js'
-export { createParse } from './expression/parse.js'
-export { createCompile } from './expression/function/compile.js'
-export { createEvaluate } from './expression/function/evaluate.js'
-export { createParserClass } from './expression/Parser.js'
 
 // logical
 export const createAnd = /* #__PURE__ */ createNumberFactory('and', andNumber)
@@ -225,22 +179,6 @@ export { createLargerEqNumber as createLargerEq } from './function/relational/la
 export { createDeepEqual } from './function/relational/deepEqual.js'
 export { createUnequalNumber as createUnequal } from './function/relational/unequal.js'
 
-// special
-export { createErf } from './function/special/erf.js'
-
-// statistics
-export { createMode } from './function/statistics/mode.js'
-export { createProd } from './function/statistics/prod.js'
-export { createMax } from './function/statistics/max.js'
-export { createMin } from './function/statistics/min.js'
-export { createSum } from './function/statistics/sum.js'
-export { createMean } from './function/statistics/mean.js'
-export { createMedian } from './function/statistics/median.js'
-export { createMad } from './function/statistics/mad.js'
-export { createVariance } from './function/statistics/variance.js'
-export { createQuantileSeq } from './function/statistics/quantileSeq.js'
-export { createStd } from './function/statistics/std.js'
-
 // string
 export { createFormat } from './function/string/format.js'
 export { createPrint } from './function/string/print.js'
@@ -271,20 +209,6 @@ export const createSin = /* #__PURE__ */ createNumberFactory('sin', sinNumber)
 export const createSinh = /* #__PURE__ */ createNumberFactory('sinh', sinhNumber)
 export const createTan = /* #__PURE__ */ createNumberFactory('tan', tanNumber)
 export const createTanh = /* #__PURE__ */ createNumberFactory('tanh', tanhNumber)
-
-// transforms
-export { createApplyTransform } from './expression/transform/apply.transform.js'
-export { createFilterTransform } from './expression/transform/filter.transform.js'
-export { createForEachTransform } from './expression/transform/forEach.transform.js'
-export { createMapTransform } from './expression/transform/map.transform.js'
-export { createMaxTransform } from './expression/transform/max.transform.js'
-export { createMeanTransform } from './expression/transform/mean.transform.js'
-export { createMinTransform } from './expression/transform/min.transform.js'
-export { createRangeTransform } from './expression/transform/range.transform.js'
-export const createSubsetTransform = /* #__PURE__ */ factory('subset', [], () => noSubset, { isTransformFunction: true })
-export { createStdTransform } from './expression/transform/std.transform.js'
-export { createSumTransform } from './expression/transform/sum.transform.js'
-export { createVarianceTransform } from './expression/transform/variance.transform.js'
 
 // utils
 export { createClone } from './function/utils/clone.js'

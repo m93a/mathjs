@@ -95,12 +95,4 @@ describe('matrix', function () {
   it('should throw an error when called with an unknown storage format', function () {
     assert.throws(function () { math.matrix([], '123') }, /TypeError: Unknown matrix type "123"/)
   })
-
-  it('should LaTeX matrix', function () {
-    const expr1 = math.parse('matrix()')
-    const expr2 = math.parse('matrix([1])')
-
-    assert.strictEqual(expr1.toTex(), '\\begin{bmatrix}\\end{bmatrix}')
-    assert.strictEqual(expr2.toTex(), '\\left(\\begin{bmatrix}1\\\\\\end{bmatrix}\\right)')
-  })
 })

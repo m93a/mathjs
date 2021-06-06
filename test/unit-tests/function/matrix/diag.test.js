@@ -115,12 +115,4 @@ describe('diag', function () {
     assert.throws(function () { math.diag(2) }, /TypeError: Unexpected type of argument/)
     assert.throws(function () { math.diag([], new Date()) }, /TypeError: Unexpected type of argument/)
   })
-
-  it('should LaTeX diag', function () {
-    const expr1 = math.parse('diag([1,2,3])')
-    const expr2 = math.parse('diag([1,2,3],1)')
-
-    assert.strictEqual(expr1.toTex(), '\\mathrm{diag}\\left(\\begin{bmatrix}1\\\\2\\\\3\\\\\\end{bmatrix}\\right)')
-    assert.strictEqual(expr2.toTex(), '\\mathrm{diag}\\left(\\begin{bmatrix}1\\\\2\\\\3\\\\\\end{bmatrix},1\\right)')
-  })
 })

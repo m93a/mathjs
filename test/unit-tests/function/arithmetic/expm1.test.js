@@ -83,9 +83,4 @@ describe('expm1', function () {
     approx.deepEqual(expm1(matrix([[0, 1], [2, 3]])), matrix([[0, 1.71828182845905], [6.38905609893065, 19.0855369231877]]))
     approx.deepEqual(expm1(sparse([[0, 1], [2, 3]])), sparse([[0, 1.71828182845905], [6.38905609893065, 19.0855369231877]]))
   })
-
-  it('should LaTeX expm1', function () {
-    const expression = math.parse('expm1(0)')
-    assert.strictEqual(expression.toTex(), '\\left(e^{0}-1\\right)')
-  })
 })

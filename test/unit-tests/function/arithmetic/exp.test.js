@@ -81,9 +81,4 @@ describe('exp', function () {
     // sparse matrix, TODO: it should return a dense matrix
     approx.deepEqual(exp(sparse([[0, 1], [2, 3]])), sparse([[1, 2.71828182845905], [7.38905609893065, 20.0855369231877]]))
   })
-
-  it('should LaTeX exp', function () {
-    const expression = math.parse('exp(0)')
-    assert.strictEqual(expression.toTex(), '\\exp\\left(0\\right)')
-  })
 })

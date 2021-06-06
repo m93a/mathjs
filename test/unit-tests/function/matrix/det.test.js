@@ -148,9 +148,4 @@ describe('det', function () {
     assert.throws(function () { det([[[1]]]) }, RangeError)
     assert.throws(function () { det(new DenseMatrix([[[1]]])) }, RangeError)
   })
-
-  it('should LaTeX det', function () {
-    const expression = math.parse('det([1])')
-    assert.strictEqual(expression.toTex(), '\\det\\left(\\begin{bmatrix}1\\\\\\end{bmatrix}\\right)')
-  })
 })

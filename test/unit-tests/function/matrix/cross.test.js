@@ -41,9 +41,4 @@ describe('cross', function () {
   it('should throw an error in case of empty vectors', function () {
     assert.throws(function () { math.cross([], []) }, /Vectors with length 3 expected/)
   })
-
-  it('should LaTeX cross', function () {
-    const expression = math.parse('cross([1],[2])')
-    assert.strictEqual(expression.toTex(), '\\left(\\begin{bmatrix}1\\\\\\end{bmatrix}\\right)\\times\\left(\\begin{bmatrix}2\\\\\\end{bmatrix}\\right)')
-  })
 })

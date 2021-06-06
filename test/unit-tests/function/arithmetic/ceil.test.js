@@ -3,7 +3,7 @@ import assert from 'assert'
 
 import approx from '../../../../tools/approx.js'
 import math from '../../../../src/defaultInstance.js'
-const { bignumber, ceil, complex, fraction, i, isFraction, matrix, pi, unit, parse, sparse } = math
+const { bignumber, ceil, complex, fraction, i, isFraction, matrix, pi, sparse } = math
 
 describe('ceil', function () {
   it('should return the ceil of a boolean', function () {
@@ -145,10 +145,6 @@ describe('ceil', function () {
     assert.deepStrictEqual(ceil(bignumber(-799999.9999999999)), bignumber(-800000))
   })
 
-  it('should throw an error for units', function () {
-    assert.throws(function () { ceil(unit('5cm')) }, TypeError, 'Function ceil(unit) not supported')
-  })
-
   it('should throw an error if requested number of decimals is incorrect', function () {
     assert.throws(function () { ceil(2.5, 1.5) }, TypeError, 'Number of decimals in function round must be an integer')
     assert.throws(function () { ceil(2.5, -2) }, Error, ' Number of decimals in function round must be in the range of 0-15')
@@ -210,10 +206,5 @@ describe('ceil', function () {
   it('should throw an in case of wrong type of arguments', function () {
     assert.throws(function () { ceil(null) }, /TypeError: Unexpected type of argument/)
     assert.throws(function () { ceil(42, null) }, /TypeError: Unexpected type of argument/)
-  })
-
-  it('should LaTeX ceil', function () {
-    const expression = parse('ceil(0.5)')
-    assert.strictEqual(expression.toTex(), '\\left\\lceil0.5\\right\\rceil')
   })
 })

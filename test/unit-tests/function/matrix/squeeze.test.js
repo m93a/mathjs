@@ -30,9 +30,4 @@ describe('squeeze', function () {
     assert.throws(function () { squeeze() }, /TypeError: Too few arguments/)
     assert.throws(function () { squeeze(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX squeeze', function () {
-    const expression = math.parse('squeeze([[0],[0]])')
-    assert.strictEqual(expression.toTex(), '\\mathrm{squeeze}\\left(\\begin{bmatrix}0\\\\0\\\\\\end{bmatrix}\\right)')
-  })
 })

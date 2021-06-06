@@ -78,11 +78,6 @@ describe('dot', function () {
     assert.throws(function () { dot([], []) }, /Cannot calculate the dot product of empty vectors/)
   })
 
-  it('should LaTeX dot', function () {
-    const expression = math.parse('dot([1,2],[3,4])')
-    assert.strictEqual(expression.toTex(), '\\left(\\begin{bmatrix}1\\\\2\\\\\\end{bmatrix}\\cdot\\begin{bmatrix}3\\\\4\\\\\\end{bmatrix}\\right)')
-  })
-
   it('should be antilinear in the first argument', function () {
     const I = complex(0, 1)
     assert.deepStrictEqual(dot([I, 2], [1, I]), I)

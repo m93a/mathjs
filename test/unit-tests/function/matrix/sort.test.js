@@ -51,9 +51,4 @@ describe('sort', function () {
     assert.throws(function () { math.sort([], 'asc', 'foo') })
     assert.throws(function () { math.sort() })
   })
-
-  it('should LaTeX sort', function () {
-    const expression = math.parse('sort([3,2,1])')
-    assert.strictEqual(expression.toTex(), '\\mathrm{sort}\\left(\\begin{bmatrix}3\\\\2\\\\1\\\\\\end{bmatrix}\\right)')
-  })
 })

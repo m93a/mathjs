@@ -204,11 +204,6 @@ describe('trace', function () {
     assert.throws(function () { math.trace(math.matrix([[[1]]])) }, RangeError)
   })
 
-  it('should LaTeX trace', function () {
-    const expression = math.parse('trace([[1,2],[3,4]])')
-    assert.strictEqual(expression.toTex(), '\\mathrm{tr}\\left(\\begin{bmatrix}1&2\\\\3&4\\\\\\end{bmatrix}\\right)')
-  })
-
   describe('DenseMatrix', function () {
     it('should calculate trace on a square matrix', function () {
       let m = math.matrix([

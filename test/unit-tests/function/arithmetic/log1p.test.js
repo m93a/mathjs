@@ -97,12 +97,4 @@ describe('log1p', function () {
     approx.deepEqual(log1p(matrix([[0, 1], [2, 3]])),
       matrix([[0, 0.693147180559945], [1.098612288668110, 1.386294361119891]]))
   })
-
-  it('should LaTeX log1p', function () {
-    const expr1 = math.parse('log1p(e)')
-    const expr2 = math.parse('log1p(32,2)')
-
-    assert.strictEqual(expr1.toTex(), '\\ln\\left( e+1\\right)')
-    assert.strictEqual(expr2.toTex(), '\\log_{2}\\left(32+1\\right)')
-  })
 })

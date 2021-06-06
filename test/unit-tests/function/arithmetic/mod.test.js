@@ -184,9 +184,4 @@ describe('mod', function () {
       approx.deepEqual(mod(sparse([[-40, -31], [11, -23]]), sparse([[3, 7], [1, 3]])), sparse([[2, 4], [0, 1]]))
     })
   })
-
-  it('should LaTeX mod', function () {
-    const expression = math.parse('mod(11,2)')
-    assert.strictEqual(expression.toTex(), '\\left(11\\mod2\\right)')
-  })
 })

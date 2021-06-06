@@ -88,9 +88,4 @@ describe('filter', function () {
     assert.throws(function () { math.filter([], /reg/, 'foo') })
     assert.throws(function () { math.filter([]) })
   })
-
-  it('should LaTeX filter', function () {
-    const expression = math.parse('filter(1,test)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{filter}\\left(1, test\\right)')
-  })
 })

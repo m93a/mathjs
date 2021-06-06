@@ -8,7 +8,6 @@ const divide = math.divide
 const matrix = math.matrix
 const sparse = math.sparse
 const complex = math.complex
-const unit = math.unit
 
 describe('dotMultiply', function () {
   it('should multiply 2 numbers', function () {
@@ -165,10 +164,5 @@ describe('dotMultiply', function () {
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { dotMultiply(1) }, /TypeError: Too few arguments/)
     assert.throws(function () { dotMultiply(1, 2, 3) }, /TypeError: Too many arguments/)
-  })
-
-  it('should LaTeX dotMultiply', function () {
-    const expression = math.parse('dotMultiply([1,2],[3,4])')
-    assert.strictEqual(expression.toTex(), '\\left(\\begin{bmatrix}1\\\\2\\\\\\end{bmatrix}.\\cdot\\begin{bmatrix}3\\\\4\\\\\\end{bmatrix}\\right)')
   })
 })

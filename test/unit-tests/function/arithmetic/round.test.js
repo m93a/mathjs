@@ -169,12 +169,4 @@ describe('round', function () {
       assert.deepStrictEqual(round(0.0, sparse([2, 3])), sparse([0, 0]))
     })
   })
-
-  it('should LaTeX round', function () {
-    const expr1 = math.parse('round(1.1)')
-    const expr2 = math.parse('round(1.1,2)')
-
-    assert.strictEqual(expr1.toTex(), '\\left\\lfloor1.1\\right\\rceil')
-    assert.strictEqual(expr2.toTex(), '\\mathrm{round}\\left(1.1,2\\right)')
-  })
 })

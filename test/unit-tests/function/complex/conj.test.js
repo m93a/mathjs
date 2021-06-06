@@ -38,9 +38,4 @@ describe('conj', function () {
     assert.throws(function () { conj() }, /TypeError: Too few arguments/)
     assert.throws(function () { conj(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX conj', function () {
-    const expression = math.parse('conj(1+i)')
-    assert.strictEqual(expression.toTex(), '\\left(1+ i\\right)^*')
-  })
 })

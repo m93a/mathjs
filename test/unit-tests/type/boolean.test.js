@@ -61,9 +61,4 @@ describe('boolean', function () {
   it('should throw an error if used with a complex', function () {
     assert.throws(function () { bool(math.complex(2, 3)) }, /TypeError: Unexpected type of argument/)
   })
-
-  it('should LaTeX boolean', function () {
-    const expression = math.parse('boolean(1)')
-    assert.strictEqual(expression.toTex(), '\\mathrm{boolean}\\left(1\\right)')
-  })
 })

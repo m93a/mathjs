@@ -122,12 +122,4 @@ describe('norm', function () {
       math.norm('a string')
     })
   })
-
-  it('should LaTeX norm', function () {
-    const expr1 = math.parse('norm(a)')
-    const expr2 = math.parse('norm(a,2)')
-
-    assert.strictEqual(expr1.toTex(), '\\left\\| a\\right\\|')
-    assert.strictEqual(expr2.toTex(), '\\mathrm{norm}\\left( a,2\\right)')
-  })
 })

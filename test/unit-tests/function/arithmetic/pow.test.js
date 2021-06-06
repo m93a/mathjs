@@ -8,7 +8,6 @@ const bignumber = math.bignumber
 const fraction = math.fraction
 const complex = math.complex
 const matrix = math.matrix
-const unit = math.unit
 const pow = math.pow
 
 describe('pow', function () {
@@ -239,10 +238,5 @@ describe('pow', function () {
     const a = [[1, 2], [3, 4]]
     assert.throws(function () { pow(a, 2.5) })
     assert.throws(function () { pow(a, [2, 3]) })
-  })
-
-  it('should LaTeX pow', function () {
-    const expression = math.parse('pow(2,10)')
-    assert.strictEqual(expression.toTex(), '\\left(2\\right)^{10}')
   })
 })

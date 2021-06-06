@@ -1,7 +1,6 @@
 // test subtract
 import assert from 'assert'
 
-import approx from '../../../../tools/approx.js'
 import math from '../../../../src/defaultInstance.js'
 const bignumber = math.bignumber
 const subtract = math.subtract
@@ -201,10 +200,5 @@ describe('subtract', function () {
 
   it('should throw an in case of wrong type of arguments', function () {
     assert.throws(function () { subtract(null, 2) }, /TypeError: Unexpected type of argument/)
-  })
-
-  it('should LaTeX subtract', function () {
-    const expression = math.parse('subtract(2,1)')
-    assert.strictEqual(expression.toTex(), '\\left(2-1\\right)')
   })
 })

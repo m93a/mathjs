@@ -93,9 +93,4 @@ describe('transpose', function () {
       assert.throws(function () { transpose(m) })
     })
   })
-
-  it('should LaTeX transpose', function () {
-    const expression = math.parse('transpose([[1,2],[3,4]])')
-    assert.strictEqual(expression.toTex(), '\\left(\\begin{bmatrix}1&2\\\\3&4\\\\\\end{bmatrix}\\right)^\\top')
-  })
 })

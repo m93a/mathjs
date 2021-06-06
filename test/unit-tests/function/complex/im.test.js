@@ -35,9 +35,4 @@ describe('im', function () {
     assert.throws(function () { math.im() }, /TypeError: Too few arguments/)
     assert.throws(function () { math.im(1, 2) }, /TypeError: Too many arguments/)
   })
-
-  it('should LaTeX im', function () {
-    const expression = math.parse('im(1+i)')
-    assert.strictEqual(expression.toTex(), '\\Im\\left\\lbrace1+ i\\right\\rbrace')
-  })
 })

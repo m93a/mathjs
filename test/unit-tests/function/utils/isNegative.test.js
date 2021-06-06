@@ -4,7 +4,6 @@ const isNegative = math.isNegative
 const bignumber = math.bignumber
 const fraction = math.fraction
 const complex = math.complex
-const unit = math.unit
 
 describe('isNegative', function () {
   it('should test whether a number is negative', function () {
