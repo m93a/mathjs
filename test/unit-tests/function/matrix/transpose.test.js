@@ -67,30 +67,4 @@ describe('transpose', function () {
       assert.throws(function () { transpose(m) })
     })
   })
-
-  describe('SparseMatrix', function () {
-    it('should transpose a 2d matrix', function () {
-      let m = math.sparse([[1, 2, 3], [4, 5, 6]])
-      let t = transpose(m)
-      assert.deepStrictEqual(t.valueOf(), [[1, 4], [2, 5], [3, 6]])
-
-      m = math.sparse([[1, 4], [2, 5], [3, 6]])
-      t = transpose(m)
-      assert.deepStrictEqual(t.toArray(), [[1, 2, 3], [4, 5, 6]])
-
-      m = math.sparse([[1, 2], [3, 4]])
-      t = transpose(m)
-      assert.deepStrictEqual(t.valueOf(), [[1, 3], [2, 4]])
-
-      m = math.sparse([[1, 2, 3, 4]], 'number')
-      t = transpose(m)
-      assert.deepStrictEqual(t.valueOf(), [[1], [2], [3], [4]])
-      assert.ok(t.datatype() === 'number')
-    })
-
-    it('should throw an error for invalid matrix transpose', function () {
-      const m = math.matrix([[]], 'sparse')
-      assert.throws(function () { transpose(m) })
-    })
-  })
 })

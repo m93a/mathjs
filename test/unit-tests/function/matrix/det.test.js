@@ -4,7 +4,6 @@ import math from '../../../../src/defaultInstance.js'
 const BigNumber = math.BigNumber
 const Complex = math.Complex
 const DenseMatrix = math.DenseMatrix
-const SparseMatrix = math.SparseMatrix
 const det = math.det
 const diag = math.diag
 const identity = math.identity
@@ -39,16 +38,6 @@ describe('det', function () {
       [2, 7, 4, 3, 7]
     ]), 1176)
     approx.equal(det(diag([4, -5, 6])), -120)
-  })
-
-  it('should return the determinant of a sparse matrix', function () {
-    approx.equal(det(new SparseMatrix([
-      [1, 7, 4, 3, 7],
-      [0, 7, 0, 3, 7],
-      [0, 7, 4, 3, 0],
-      [1, 7, 5, 9, 7],
-      [2, 7, 4, 3, 7]
-    ])), -1176)
   })
 
   it('should return 1 for the identity matrix', function () {

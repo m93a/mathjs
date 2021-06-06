@@ -71,12 +71,6 @@ describe('dotDivide', function () {
       assert.deepStrictEqual(dotDivide(a, b), math.matrix([[1 / 5, 2 / 6], [3 / 7, 4 / 8]]))
     })
 
-    it('should perform (array ./ sparse matrix) element-wise matrix division', function () {
-      const a = [[1, 2], [3, 4]]
-      const b = math.sparse([[5, 0], [7, 8]])
-      assert.deepStrictEqual(dotDivide(a, b), math.matrix([[1 / 5, Infinity], [3 / 7, 4 / 8]]))
-    })
-
     it('should throw an error when dividing element-wise with differing size', function () {
       assert.throws(function () { dotDivide([[1, 2], [3, 4]], [[1]]) })
     })
@@ -106,49 +100,8 @@ describe('dotDivide', function () {
       assert.deepStrictEqual(dotDivide(a, b), math.matrix([[1 / 5, 2 / 6], [3 / 7, 4 / 8]]))
     })
 
-    it('should perform (dense matrix ./ sparse matrix) element-wise matrix division', function () {
-      const a = math.matrix([[1, 2], [3, 4]])
-      const b = math.sparse([[5, 0], [7, 8]])
-      assert.deepStrictEqual(dotDivide(a, b), math.matrix([[1 / 5, Infinity], [3 / 7, 4 / 8]]))
-    })
-
     it('should throw an error when dividing element-wise with differing size', function () {
       assert.throws(function () { dotDivide(math.matrix([[1, 2], [3, 4]]), math.matrix([[1]])) })
-    })
-  })
-
-  describe('SparseMatrix', function () {
-    it('should divide all the elements of a sparse matrix by one number', function () {
-      assert.deepStrictEqual(dotDivide(math.sparse([[2, 0, 6], [8, 10, 12]]), 2), math.sparse([[1, 0, 3], [4, 5, 6]]))
-      const a = math.sparse([[1, 2], [3, 4]])
-      assert.deepStrictEqual(dotDivide(a, 2), math.sparse([[0.5, 1], [1.5, 2]]))
-      assert.deepStrictEqual(dotDivide(math.sparse(), 2), math.sparse())
-    })
-
-    it('should divide 1 over a sparse matrix element-wise', function () {
-      approx.deepEqual(dotDivide(1, math.sparse([[1, 4, 7], [3, 0, 5], [-1, 9, 11]])), math.matrix([[1, 0.25, 1 / 7], [1 / 3, Infinity, 0.2], [-1, 1 / 9, 1 / 11]]))
-    })
-
-    it('should perform (sparse matrix ./ array) element-wise matrix division', function () {
-      const a = math.sparse([[1, 2], [3, 4]])
-      const b = [[5, 6], [7, 8]]
-      assert.deepStrictEqual(dotDivide(a, b), math.sparse([[1 / 5, 2 / 6], [3 / 7, 4 / 8]]))
-    })
-
-    it('should perform (sparse matrix ./ dense matrix) element-wise matrix division', function () {
-      const a = math.sparse([[1, 2], [3, 4]])
-      const b = math.matrix([[5, 6], [7, 8]])
-      assert.deepStrictEqual(dotDivide(a, b), math.sparse([[1 / 5, 2 / 6], [3 / 7, 4 / 8]]))
-    })
-
-    it('should perform (sparse matrix ./ sparse matrix) element-wise matrix division', function () {
-      const a = math.sparse([[1, 2], [0, 4]])
-      const b = math.sparse([[5, 0], [7, 8]])
-      assert.deepStrictEqual(dotDivide(a, b), math.matrix([[1 / 5, Infinity], [0, 4 / 8]]))
-    })
-
-    it('should throw an error when dividing element-wise with differing size', function () {
-      assert.throws(function () { dotDivide(math.sparse([[1, 2], [3, 4]]), math.sparse([[1]])) })
     })
   })
 })

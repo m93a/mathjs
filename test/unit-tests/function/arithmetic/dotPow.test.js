@@ -5,7 +5,6 @@ import approx from '../../../../tools/approx.js'
 import math from '../../../../src/defaultInstance.js'
 const complex = math.complex
 const matrix = math.matrix
-const sparse = math.sparse
 const unit = math.unit
 const dotPow = math.dotPow
 
@@ -107,10 +106,6 @@ describe('dotPow', function () {
     it('should elevate array .^ dense matrix', function () {
       approx.deepEqual(dotPow([[1, 2, 0], [0, 1, 4]], matrix([[2, 1, 0], [4, 1, 0]])), matrix([[1, 2, 1], [0, 1, 1]]))
     })
-
-    it('should elevate array .^ sparse matrix', function () {
-      approx.deepEqual(dotPow([[1, 2, 0], [0, 1, 4]], sparse([[2, 1, 0], [4, 1, 0]])), matrix([[1, 2, 1], [0, 1, 1]]))
-    })
   })
 
   describe('DenseMatrix', function () {
@@ -132,36 +127,6 @@ describe('dotPow', function () {
 
     it('should elevate dense matrix .^ dense matrix', function () {
       approx.deepEqual(dotPow(matrix([[1, 2, 0], [0, 1, 4]]), matrix([[2, 1, 0], [4, 1, 0]])), matrix([[1, 2, 1], [0, 1, 1]]))
-    })
-
-    it('should elevate dense matrix .^ sparse matrix', function () {
-      approx.deepEqual(dotPow(matrix([[1, 2, 0], [0, 1, 4]]), sparse([[2, 1, 0], [4, 1, 0]])), matrix([[1, 2, 1], [0, 1, 1]]))
-    })
-  })
-
-  describe('SparseMatrix', function () {
-    it('should elevate sparse matrix .^ scalar', function () {
-      approx.deepEqual(dotPow(sparse([[1, 2], [0, 4]]), 2), sparse([[1, 4], [0, 16]]))
-      approx.deepEqual(dotPow(sparse([[1, 2], [0, 4]]), 2.5), sparse([[1, 5.65685424949238], [0, 32]]))
-      approx.deepEqual(dotPow(sparse([[1, 2, 3], [4, 5, 0]]), 2), sparse([[1, 4, 9], [16, 25, 0]]))
-    })
-
-    it('should elevate scalar .^ sparse matrix', function () {
-      approx.deepEqual(dotPow(2, sparse([[1, 2], [0, 4]])), matrix([[2, 4], [1, 16]]))
-      approx.deepEqual(dotPow(2.5, sparse([[1, 2], [0, 4]])), matrix([[2.5, 6.25], [1, 39.0625]]))
-      approx.deepEqual(dotPow(2, sparse([[1, 2, 3], [4, 5, 0]])), matrix([[2, 4, 8], [16, 32, 1]]))
-    })
-
-    it('should elevate sparse matrix .^ array', function () {
-      approx.deepEqual(dotPow(sparse([[1, 2, 0], [0, 1, 4]]), [[2, 1, 0], [4, 1, 0]]), matrix([[1, 2, 1], [0, 1, 1]]))
-    })
-
-    it('should elevate sparse matrix .^ dense matrix', function () {
-      approx.deepEqual(dotPow(sparse([[1, 2, 0], [0, 1, 4]]), matrix([[2, 1, 0], [4, 1, 0]])), matrix([[1, 2, 1], [0, 1, 1]]))
-    })
-
-    it('should elevate sparse matrix .^ sparse matrix', function () {
-      approx.deepEqual(dotPow(sparse([[1, 2, 0], [0, 1, 4]]), sparse([[2, 1, 0], [4, 1, 0]])), matrix([[1, 2, 1], [0, 1, 1]]))
     })
   })
 })

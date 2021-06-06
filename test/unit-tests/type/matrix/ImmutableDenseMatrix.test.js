@@ -3,7 +3,6 @@ import math from '../../../../src/defaultInstance.js'
 const Matrix = math.Matrix
 const DenseMatrix = math.DenseMatrix
 const ImmutableDenseMatrix = math.ImmutableDenseMatrix
-const SparseMatrix = math.SparseMatrix
 const Complex = math.Complex
 const Range = math.Range
 
@@ -60,19 +59,6 @@ describe('ImmutableDenseMatrix', function () {
       const m2 = new ImmutableDenseMatrix(m1)
       assert.deepStrictEqual(m1._size, m2._size)
       assert.deepStrictEqual(m1._data, m2._data)
-    })
-
-    it('should create a ImmutableDenseMatrix from a SparseMatrix', function () {
-      const m1 = new SparseMatrix(
-        [
-          [1, 2, 3],
-          [4, 5, 6],
-          [7, 8, 9],
-          [10, 11, 12]
-        ])
-      const m2 = new ImmutableDenseMatrix(m1)
-      assert.deepStrictEqual(m1.size(), m2.size())
-      assert.deepStrictEqual(m1.toArray(), m2.toArray())
     })
 
     it('should have a property isMatrix', function () {

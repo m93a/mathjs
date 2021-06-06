@@ -3,7 +3,6 @@ import math from '../../../../src/defaultInstance.js'
 
 const dot = math.dot
 const matrix = math.matrix
-const sparse = math.sparse
 const complex = math.complex
 
 describe('dot', function () {
@@ -55,11 +54,6 @@ describe('dot', function () {
   it('should calculate dot product for mixed 1-dim vectors and column vectors', function () {
     assert.strictEqual(dot(matrix([2, 4, 1]), matrix([[2], [2], [3]])), 15)
     assert.strictEqual(dot(matrix([[7], [3]]), matrix([2, 4])), 26)
-  })
-
-  it('should calculate dot product for sparse vectors', function () {
-    assert.strictEqual(dot(sparse([0, 0, 2, 4, 4, 1]), sparse([1, 0, 2, 2, 0, 3])), 15)
-    assert.strictEqual(dot(sparse([7, 1, 2, 3]), sparse([2, 0, 0, 4])), 26)
   })
 
   it('should throw an error for unsupported types of arguments', function () {

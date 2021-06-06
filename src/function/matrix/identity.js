@@ -9,11 +9,10 @@ const dependencies = [
   'config',
   'matrix',
   'BigNumber',
-  'DenseMatrix',
-  'SparseMatrix'
+  'DenseMatrix'
 ]
 
-export const createIdentity = /* #__PURE__ */ factory(name, dependencies, ({ typed, config, matrix, BigNumber, DenseMatrix, SparseMatrix }) => {
+export const createIdentity = /* #__PURE__ */ factory(name, dependencies, ({ typed, config, matrix, BigNumber, DenseMatrix }) => {
   /**
    * Create a 2-dimensional identity matrix with size m x n or n x n.
    * The matrix has ones on the diagonal and zeros elsewhere.
@@ -125,10 +124,6 @@ export const createIdentity = /* #__PURE__ */ factory(name, dependencies, ({ typ
 
     // check we need to return a matrix
     if (format) {
-      // create diagonal matrix (use optimized implementation for storage format)
-      if (format === 'sparse') {
-        return SparseMatrix.diagonal(size, one, 0, defaultValue)
-      }
       if (format === 'dense') {
         return DenseMatrix.diagonal(size, one, 0, defaultValue)
       }

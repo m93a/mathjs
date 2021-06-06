@@ -12,10 +12,7 @@ const dependencies = [
   'subtract',
   'larger',
   'equalScalar',
-  'unaryMinus',
-  'DenseMatrix',
-  'SparseMatrix',
-  'Spa'
+  'DenseMatrix'
 ]
 
 export const createLup = /* #__PURE__ */ factory(name, dependencies, (
@@ -29,10 +26,7 @@ export const createLup = /* #__PURE__ */ factory(name, dependencies, (
     subtract,
     larger,
     equalScalar,
-    unaryMinus,
-    DenseMatrix,
-    SparseMatrix,
-    Spa
+    DenseMatrix
   }
 ) => {
   /**
@@ -65,10 +59,6 @@ export const createLup = /* #__PURE__ */ factory(name, dependencies, (
 
     DenseMatrix: function (m) {
       return _denseLUP(m)
-    },
-
-    SparseMatrix: function (m) {
-      return _sparseLUP(m)
     },
 
     Array: function (a) {
@@ -234,158 +224,6 @@ export const createLup = /* #__PURE__ */ factory(name, dependencies, (
       L: l,
       U: u,
       p: pv,
-      toString: function () {
-        return 'L: ' + this.L.toString() + '\nU: ' + this.U.toString() + '\nP: ' + this.p
-      }
-    }
-  }
-
-  function _sparseLUP (m) {
-    // rows & columns
-    const rows = m._size[0]
-    const columns = m._size[1]
-    // minimum rows and columns
-    const n = Math.min(rows, columns)
-    // matrix arrays (will not be modified, thanks to permutation vector)
-    const values = m._values
-    const index = m._index
-    const ptr = m._ptr
-    // l matrix arrays
-    const lvalues = []
-    const lindex = []
-    const lptr = []
-    const lsize = [rows, n]
-    // u matrix arrays
-    const uvalues = []
-    const uindex = []
-    const uptr = []
-    const usize = [n, columns]
-    // vars
-    let i, j, k
-    // permutation vectors, (current index -> original index) and (original index -> current index)
-    const pvCo = []
-    const pvOc = []
-    for (i = 0; i < rows; i++) {
-      pvCo[i] = i
-      pvOc[i] = i
-    }
-    // swap indices in permutation vectors (condition x < y)!
-    const swapIndeces = function (x, y) {
-      // find pv indeces getting data from x and y
-      const kx = pvOc[x]
-      const ky = pvOc[y]
-      // update permutation vector current -> original
-      pvCo[kx] = y
-      pvCo[ky] = x
-      // update permutation vector original -> current
-      pvOc[x] = ky
-      pvOc[y] = kx
-    }
-    // loop columns
-    for (j = 0; j < columns; j++) {
-      // sparse accumulator
-      const spa = new Spa()
-      // check lower triangular matrix has a value @ column j
-      if (j < rows) {
-        // update ptr
-        lptr.push(lvalues.length)
-        // first value in j column for lower triangular matrix
-        lvalues.push(1)
-        lindex.push(j)
-      }
-      // update ptr
-      uptr.push(uvalues.length)
-      // k0 <= k < k1 where k0 = _ptr[j] && k1 = _ptr[j+1]
-      const k0 = ptr[j]
-      const k1 = ptr[j + 1]
-      // copy column j into sparse accumulator
-      for (k = k0; k < k1; k++) {
-        // row
-        i = index[k]
-        // copy column values into sparse accumulator (use permutation vector)
-        spa.set(pvCo[i], values[k])
-      }
-      // skip first column in upper triangular matrix
-      if (j > 0) {
-        // loop rows in column j (above diagonal)
-        spa.forEach(0, j - 1, function (k, vkj) {
-          // loop rows in column k (L)
-          SparseMatrix._forEachRow(k, lvalues, lindex, lptr, function (i, vik) {
-            // check row is below k
-            if (i > k) {
-              // update spa value
-              spa.accumulate(i, unaryMinus(multiplyScalar(vik, vkj)))
-            }
-          })
-        })
-      }
-      // row with larger value in spa, row >= j
-      let pi = j
-      let vjj = spa.get(j)
-      let pabsv = abs(vjj)
-      // loop values in spa (order by row, below diagonal)
-      spa.forEach(j + 1, rows - 1, function (x, v) {
-        // absolute value
-        const absv = abs(v)
-        // value is greater than pivote value
-        if (larger(absv, pabsv)) {
-          // store row
-          pi = x
-          // update max value
-          pabsv = absv
-          // value @ [j, j]
-          vjj = v
-        }
-      })
-      // swap rows (j <-> pi)
-      if (j !== pi) {
-        // swap values j <-> pi in L
-        SparseMatrix._swapRows(j, pi, lsize[1], lvalues, lindex, lptr)
-        // swap values j <-> pi in U
-        SparseMatrix._swapRows(j, pi, usize[1], uvalues, uindex, uptr)
-        // swap values in spa
-        spa.swap(j, pi)
-        // update permutation vector (swap values @ j, pi)
-        swapIndeces(j, pi)
-      }
-      // loop values in spa (order by row)
-      spa.forEach(0, rows - 1, function (x, v) {
-        // check we are above diagonal
-        if (x <= j) {
-          // update upper triangular matrix
-          uvalues.push(v)
-          uindex.push(x)
-        } else {
-          // update value
-          v = divideScalar(v, vjj)
-          // check value is non zero
-          if (!equalScalar(v, 0)) {
-            // update lower triangular matrix
-            lvalues.push(v)
-            lindex.push(x)
-          }
-        }
-      })
-    }
-    // update ptrs
-    uptr.push(uvalues.length)
-    lptr.push(lvalues.length)
-
-    // return matrices
-    return {
-      L: new SparseMatrix({
-        values: lvalues,
-        index: lindex,
-        ptr: lptr,
-        size: lsize
-      }),
-      U: new SparseMatrix({
-        values: uvalues,
-        index: uindex,
-        ptr: uptr,
-        size: usize
-      }),
-      p: pvCo,
       toString: function () {
         return 'L: ' + this.L.toString() + '\nU: ' + this.U.toString() + '\nP: ' + this.p
       }

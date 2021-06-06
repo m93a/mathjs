@@ -12,12 +12,6 @@ describe('ones', function () {
     assert.deepStrictEqual(ones(matrix([])), matrix())
   })
 
-  it('should create an empty matrix, sparse', function () {
-    assert.deepStrictEqual(ones('sparse'), matrix('sparse'))
-    assert.deepStrictEqual(ones([], 'sparse'), matrix([], 'sparse'))
-    assert.deepStrictEqual(ones(matrix([]), 'sparse'), matrix('sparse'))
-  })
-
   it('should create a vector with ones', function () {
     assert.deepStrictEqual(ones(3), matrix([1, 1, 1]))
     assert.deepStrictEqual(ones(matrix([4])), matrix([1, 1, 1, 1]))

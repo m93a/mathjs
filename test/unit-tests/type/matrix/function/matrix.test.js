@@ -24,11 +24,6 @@ describe('matrix', function () {
     assert(a.datatype(), 'number')
   })
 
-  it('should create empty matrix, sparse', function () {
-    const a = matrix('sparse')
-    assert.ok(a instanceof math.Matrix)
-  })
-
   it('should create a matrix from an array', function () {
     const b = matrix([[1, 2], [3, 4]])
     assert.ok(b instanceof math.Matrix)
@@ -51,21 +46,6 @@ describe('matrix', function () {
     assert.ok(c._size !== b._size)
     assert.deepStrictEqual(c._data, b._data)
     assert.deepStrictEqual(c._size, b._size)
-    assert.ok(c.datatype() === 'number')
-  })
-
-  it('should be the identity if called with a matrix, sparse', function () {
-    const b = matrix([[1, 2], [3, 4]], 'sparse')
-    const c = matrix(b, 'sparse')
-    assert.ok(c._values !== b._values) // data should be cloned
-    assert.deepStrictEqual(c, matrix([[1, 2], [3, 4]], 'sparse'))
-  })
-
-  it('should be the identity if called with a matrix, sparse, number datatype', function () {
-    const b = matrix([[1, 2], [3, 4]], 'sparse', 'number')
-    const c = matrix(b, 'sparse')
-    assert.ok(c._values !== b._values) // data should be cloned
-    assert.deepStrictEqual(c.valueOf(), b.valueOf())
     assert.ok(c.datatype() === 'number')
   })
 

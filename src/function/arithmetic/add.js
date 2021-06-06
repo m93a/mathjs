@@ -1,7 +1,5 @@
 import { factory } from '../../utils/factory.js'
 import { extend } from '../../utils/object.js'
-import { createAlgorithm01 } from '../../type/matrix/utils/algorithm01.js'
-import { createAlgorithm04 } from '../../type/matrix/utils/algorithm04.js'
 import { createAlgorithm10 } from '../../type/matrix/utils/algorithm10.js'
 import { createAlgorithm13 } from '../../type/matrix/utils/algorithm13.js'
 import { createAlgorithm14 } from '../../type/matrix/utils/algorithm14.js'
@@ -12,13 +10,10 @@ const dependencies = [
   'matrix',
   'addScalar',
   'equalScalar',
-  'DenseMatrix',
-  'SparseMatrix'
+  'DenseMatrix'
 ]
 
-export const createAdd = /* #__PURE__ */ factory(name, dependencies, ({ typed, matrix, addScalar, equalScalar, DenseMatrix, SparseMatrix }) => {
-  const algorithm01 = createAlgorithm01({ typed })
-  const algorithm04 = createAlgorithm04({ typed, equalScalar })
+export const createAdd = /* #__PURE__ */ factory(name, dependencies, ({ typed, matrix, addScalar, equalScalar, DenseMatrix }) => {
   const algorithm10 = createAlgorithm10({ typed, DenseMatrix })
   const algorithm13 = createAlgorithm13({ typed })
   const algorithm14 = createAlgorithm14({ typed })
@@ -64,18 +59,6 @@ export const createAdd = /* #__PURE__ */ factory(name, dependencies, ({ typed, m
       return algorithm13(x, y, addScalar)
     },
 
-    'DenseMatrix, SparseMatrix': function (x, y) {
-      return algorithm01(x, y, addScalar, false)
-    },
-
-    'SparseMatrix, DenseMatrix': function (x, y) {
-      return algorithm01(y, x, addScalar, true)
-    },
-
-    'SparseMatrix, SparseMatrix': function (x, y) {
-      return algorithm04(x, y, addScalar)
-    },
-
     'Array, Array': function (x, y) {
       // use matrix implementation
       return this(matrix(x), matrix(y)).valueOf()
@@ -101,10 +84,6 @@ export const createAdd = /* #__PURE__ */ factory(name, dependencies, ({ typed, m
 
     'any, DenseMatrix': function (x, y) {
       return algorithm14(y, x, addScalar, true)
-    },
-
-    'any, SparseMatrix': function (x, y) {
-      return algorithm10(y, x, addScalar, true)
     },
 
     'Array, any': function (x, y) {

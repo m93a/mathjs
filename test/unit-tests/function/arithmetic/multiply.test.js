@@ -231,9 +231,6 @@ describe('multiply', function () {
 
       r = multiply(v, math.matrix([[3], [4], [6], [0], [1], [2], [0]], 'dense'))
       assert.deepStrictEqual(r, math.matrix([[39]], 'dense'))
-
-      r = multiply(v, math.matrix([[3], [4], [6], [0], [1], [2], [0]], 'sparse'))
-      assert.deepStrictEqual(r, math.matrix([[39]], 'sparse'))
     })
 
     it('should multiply dense row vector x column vector', function () {
@@ -244,9 +241,6 @@ describe('multiply', function () {
 
       r = multiply(v, math.matrix([[3], [4], [6], [0], [1], [2], [0]], 'dense'))
       assert.deepStrictEqual(r, math.matrix([[39]]))
-
-      r = multiply(v, math.matrix([[3], [4], [6], [0], [1], [2], [0]], 'sparse'))
-      assert.deepStrictEqual(r, math.matrix([[39]], 'sparse'))
     })
 
     it('should throw an error when multiplying empty vectors', function () {
@@ -317,7 +311,7 @@ describe('multiply', function () {
       r = multiply(m, math.matrix([
         [2, 0],
         [4, 0]
-      ], 'sparse'))
+      ], 'dense'))
       assert.deepStrictEqual(
         r.valueOf(),
         [
@@ -329,7 +323,7 @@ describe('multiply', function () {
     it('should multiply matrix x matrix', function () {
       const m = math.matrix([[1, 2], [3, 4]], 'dense')
 
-      let r = multiply(m, math.matrix([[5, 6], [7, 8]], 'sparse'))
+      let r = multiply(m, math.matrix([[5, 6], [7, 8]], 'dense'))
       assert.deepStrictEqual(
         r.valueOf(),
         [
@@ -496,290 +490,6 @@ describe('multiply', function () {
       approx.deepEqual(multiply([[1, 2], [3, 4]], [[5, 6], [7, 8]]), [[19, 22], [43, 50]])
       approx.deepEqual(multiply([1, 2, 3, 4], 2), [2, 4, 6, 8])
       approx.deepEqual(multiply(matrix([1, 2, 3, 4]), 2), matrix([2, 4, 6, 8]))
-    })
-  })
-
-  describe('Sparse Matrix', function () {
-    it('should multiply matrix x scalar', function () {
-      const m = math.matrix([[2, 0], [4, 0]], 'sparse')
-
-      let r = multiply(m, 3)
-      assert.deepStrictEqual(r._size, m._size)
-      assert.deepStrictEqual(r._values, [6, 12])
-      assert.deepStrictEqual(r._index, m._index)
-      assert.deepStrictEqual(r._ptr, m._ptr)
-
-      r = multiply(m, math.complex(3, 3))
-      assert.deepStrictEqual(r._size, m._size)
-      assert.deepStrictEqual(r._values, [math.complex(6, 6), math.complex(12, 12)])
-      assert.deepStrictEqual(r._index, m._index)
-      assert.deepStrictEqual(r._ptr, m._ptr)
-
-      r = multiply(m, math.bignumber(3))
-      assert.deepStrictEqual(r._size, m._size)
-      assert.deepStrictEqual(r._values, [math.bignumber(6), math.bignumber(12)])
-      assert.deepStrictEqual(r._index, m._index)
-      assert.deepStrictEqual(r._ptr, m._ptr)
-
-      r = multiply(m, true)
-      assert.deepStrictEqual(r._size, m._size)
-      assert.deepStrictEqual(r._values, [2, 4])
-      assert.deepStrictEqual(r._index, m._index)
-      assert.deepStrictEqual(r._ptr, m._ptr)
-
-      r = multiply(m, false)
-      assert.deepStrictEqual(r._size, m._size)
-      assert.deepStrictEqual(r._values, [])
-      assert.deepStrictEqual(r._index, [])
-      assert.deepStrictEqual(r._ptr, [0, 0, 0])
-    })
-
-    it('should multiply matrix x matrix with zeros', function () {
-      const m = math.matrix([[2, 0], [4, 0]], 'sparse')
-
-      let r = multiply(m, math.matrix([[2, 0], [4, 0]], 'sparse'))
-      assert.deepStrictEqual(
-        r.valueOf(),
-        [
-          [4, 0],
-          [8, 0]
-        ])
-
-      r = multiply(m, math.matrix([[2, 0], [4, 0]], 'dense'))
-      assert.deepStrictEqual(
-        r.valueOf(),
-        [
-          [4, 0],
-          [8, 0]
-        ])
-    })
-
-    it('should multiply matrix x matrix', function () {
-      const m = math.matrix([[1, 2], [3, 4]], 'sparse')
-
-      let r = multiply(m, math.matrix([[5, 6], [7, 8]], 'sparse'))
-      assert.deepStrictEqual(
-        r.valueOf(),
-        [
-          [19, 22],
-          [43, 50]
-        ])
-
-      r = multiply(m, math.matrix([[5, 6], [7, 8]], 'dense'))
-      assert.deepStrictEqual(
-        r.valueOf(),
-        [
-          [19, 22],
-          [43, 50]
-        ])
-    })
-
-    it('should multiply matrix x matrix, number datatype', function () {
-      const m1 = math.matrix([[1, 2], [3, 4]], 'sparse', 'number')
-      const m2 = math.matrix([[5, 6], [7, 8]], 'sparse', 'number')
-
-      const r = multiply(m1, m2)
-      assert(r.datatype() === 'number')
-      assert.deepStrictEqual(
-        r.valueOf(),
-        [
-          [19, 22],
-          [43, 50]
-        ])
-    })
-
-    it('should multiply matrix x array', function () {
-      const m = math.matrix([[2, 0], [4, 0]], 'sparse')
-
-      let r = multiply(m,
-        [
-          [2, 0],
-          [4, 0]
-        ])
-      assert.deepStrictEqual(
-        r.valueOf(),
-        [
-          [4, 0],
-          [8, 0]
-        ])
-
-      r = multiply(m,
-        [
-          [2, 0, 1],
-          [4, 0, 1]
-        ])
-      assert.deepStrictEqual(
-        r.valueOf(),
-        [
-          [4, 0, 2],
-          [8, 0, 4]
-        ])
-    })
-
-    it('should multiply matrix x vector array', function () {
-      const m = math.matrix([[2, 0], [4, 0]], 'sparse')
-
-      const r = multiply(m,
-        [
-          [2],
-          [4]
-        ])
-      assert.deepStrictEqual(
-        r.valueOf(),
-        [
-          [4],
-          [8]
-        ])
-    })
-
-    it('should NOT squeeze scalar results of matrix * matrix', function () {
-      const a = math.matrix([[1, 2, 3]], 'sparse')
-      const b = math.matrix([[4], [5], [6]], 'sparse')
-      assert.deepStrictEqual(multiply(a, b), math.matrix([[32]], 'sparse'))
-    })
-
-    it('should NOT squeeze scalar results of matrix * vector', function () {
-      const a = math.matrix([[1, 2, 3]], 'sparse')
-      const b = [4, 5, 6]
-      assert.deepStrictEqual(multiply(a, b), math.matrix([32], 'sparse'))
-    })
-
-    it('should throw an error when multiplying matrices with incompatible sizes', function () {
-      // vector * vector
-      assert.throws(function () { math.matrix([1, 1], 'sparse').multiply([1, 1, 1]) })
-
-      // matrix * matrix
-      assert.throws(function () { math.matrix([[1, 1]], 'sparse').multiply([[1, 1]]) })
-      assert.throws(function () { math.matrix([[1, 1]], 'sparse').multiply([[1, 1], [1, 1], [1, 1]]) })
-
-      // matrix * vector
-      assert.throws(function () { math.matrix([[1, 1], [1, 1]], 'sparse').multiply([1, 1, 1]) })
-
-      // vector * matrix
-      assert.throws(function () { math.matrix([1, 1, 1], 'sparse').multiply([[1, 1], [1, 1]]) })
-    })
-
-    it('should multiply triangular matrices', function () {
-      const l = math.matrix([
-        [1, 0, 0, 0],
-        [-0.5, 1, 0, 0],
-        [0, -0.7, 1, 0],
-        [0.0666667, -0.4, -0.5714286, 1]
-      ], 'sparse')
-      const u = math.matrix([
-        [240, -2700, 6480, -4200],
-        [0, -150, 540, -420],
-        [0, 0, -42, 56],
-        [0, 0, 0, 4]
-      ], 'sparse')
-
-      const r = multiply(l, u)
-
-      assert(r.storage(), 'sparse')
-      approx.deepEqual(
-        r.valueOf(),
-        [
-          [240, -2700, 6480, -4200],
-          [-120, 1200, -2700, 1680],
-          [0, 105, -420, 350],
-          [16, -120, 240, -140]
-        ])
-    })
-
-    const a = matrix([[1, 2], [3, 4]], 'sparse')
-    const b = matrix([[5, 6], [7, 8]], 'sparse')
-    const c = matrix([[5], [6]], 'sparse')
-    const d = matrix([[5, 6]], 'sparse')
-
-    it('should perform element-wise multiplication if multiplying a matrix and a number', function () {
-      approx.deepEqual(multiply(a, 3), matrix([[3, 6], [9, 12]], 'sparse'))
-      approx.deepEqual(multiply(3, a), matrix([[3, 6], [9, 12]], 'sparse'))
-    })
-
-    it('should perform matrix multiplication', function () {
-      approx.deepEqual(multiply(a, b), matrix([[19, 22], [43, 50]], 'sparse'))
-      approx.deepEqual(multiply(a, c), matrix([[17], [39]], 'sparse'))
-      approx.deepEqual(multiply(d, a), matrix([[23, 34]], 'sparse'))
-      approx.deepEqual(multiply(d, b), matrix([[67, 78]], 'sparse'))
-      approx.deepEqual(multiply(d, c), matrix([[61]], 'sparse'))
-    })
-
-    it('should multiply two pattern matrices correctly', function () {
-      const a = new math.SparseMatrix({
-        values: undefined,
-        index: [0, 1, 2, 0],
-        ptr: [0, 2, 3, 4],
-        size: [3, 3]
-      })
-
-      const b = new math.SparseMatrix({
-        values: undefined,
-        index: [0, 1, 2, 1],
-        ptr: [0, 3, 3, 4],
-        size: [3, 3]
-      })
-
-      const c = multiply(a, b)
-
-      assert.deepStrictEqual(
-        c.valueOf(),
-        [
-          [1, 0, 0],
-          [1, 0, 0],
-          [1, 0, 1]
-        ])
-    })
-
-    it('should multiply pattern and value matrices correctly', function () {
-      const a = new math.SparseMatrix({
-        values: undefined,
-        index: [0, 1, 2, 0],
-        ptr: [0, 2, 3, 4],
-        size: [3, 3]
-      })
-
-      const b = new math.SparseMatrix({
-        values: [1, 2, 3, 4],
-        index: [0, 1, 2, 1],
-        ptr: [0, 3, 3, 4],
-        size: [3, 3]
-      })
-
-      const c = multiply(a, b)
-
-      assert.deepStrictEqual(
-        c.valueOf(),
-        [
-          [1, 0, 0],
-          [1, 0, 0],
-          [1, 0, 1]
-        ])
-    })
-
-    it('should multiply value and pattern matrices correctly', function () {
-      const a = new math.SparseMatrix({
-        values: [1, 2, 3, 4],
-        index: [0, 1, 2, 0],
-        ptr: [0, 2, 3, 4],
-        size: [3, 3]
-      })
-
-      const b = new math.SparseMatrix({
-        values: undefined,
-        index: [0, 1, 2, 1],
-        ptr: [0, 3, 3, 4],
-        size: [3, 3]
-      })
-
-      const c = multiply(a, b)
-
-      assert.deepStrictEqual(
-        c.valueOf(),
-        [
-          [1, 0, 0],
-          [1, 0, 0],
-          [1, 0, 1]
-        ])
     })
   })
 

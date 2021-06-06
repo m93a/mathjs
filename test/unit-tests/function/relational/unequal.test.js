@@ -5,7 +5,6 @@ import math from '../../../../src/defaultInstance.js'
 const bignumber = math.bignumber
 const complex = math.complex
 const matrix = math.matrix
-const sparse = math.sparse
 const unit = math.unit
 const unequal = math.unequal
 
@@ -172,10 +171,6 @@ describe('unequal', function () {
       assert.deepStrictEqual(unequal([[1, 2, 0], [-1, 0, 2]], matrix([[1, -1, 0], [-1, 1, 0]])), matrix([[false, true, false], [false, true, true]]))
     })
 
-    it('should compare array - sparse matrix', function () {
-      assert.deepStrictEqual(unequal([[1, 2, 0], [-1, 0, 2]], sparse([[1, -1, 0], [-1, 1, 0]])), matrix([[false, true, false], [false, true, true]]))
-    })
-
     it('should throw an error if arrays have different sizes', function () {
       assert.throws(function () { unequal([1, 4, 5], [3, 4]) })
     })
@@ -193,29 +188,6 @@ describe('unequal', function () {
 
     it('should compare dense matrix - dense matrix', function () {
       assert.deepStrictEqual(unequal(matrix([[1, 2, 0], [-1, 0, 2]]), matrix([[1, -1, 0], [-1, 1, 0]])), matrix([[false, true, false], [false, true, true]]))
-    })
-
-    it('should compare dense matrix - sparse matrix', function () {
-      assert.deepStrictEqual(unequal(matrix([[1, 2, 0], [-1, 0, 2]]), sparse([[1, -1, 0], [-1, 1, 0]])), matrix([[false, true, false], [false, true, true]]))
-    })
-  })
-
-  describe('SparseMatrix', function () {
-    it('should compare sparse matrix - scalar', function () {
-      assert.deepStrictEqual(unequal(2, sparse([[1, 2], [3, 4]])), matrix([[true, false], [true, true]]))
-      assert.deepStrictEqual(unequal(sparse([[1, 2], [3, 4]]), 2), matrix([[true, false], [true, true]]))
-    })
-
-    it('should compare sparse matrix - array', function () {
-      assert.deepStrictEqual(unequal(sparse([[1, 2, 0], [-1, 0, 2]]), [[1, -1, 0], [-1, 1, 0]]), matrix([[false, true, false], [false, true, true]]))
-    })
-
-    it('should compare sparse matrix - dense matrix', function () {
-      assert.deepStrictEqual(unequal(sparse([[1, 2, 0], [-1, 0, 2]]), matrix([[1, -1, 0], [-1, 1, 0]])), matrix([[false, true, false], [false, true, true]]))
-    })
-
-    it('should compare sparse matrix - sparse matrix', function () {
-      assert.deepStrictEqual(unequal(sparse([[1, 2, 0], [-1, 0, 2]]), sparse([[1, -1, 0], [-1, 1, 0]])), matrix([[false, true, false], [false, true, true]]))
     })
   })
 

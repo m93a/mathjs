@@ -5,7 +5,6 @@ import approx from '../../../../tools/approx.js'
 import math from '../../../../src/defaultInstance.js'
 const complex = math.complex
 const matrix = math.matrix
-const sparse = math.sparse
 const unit = math.unit
 const expm1 = math.expm1
 
@@ -81,6 +80,5 @@ describe('expm1', function () {
     // dense matrix
     approx.deepEqual(expm1(matrix([0, 1, 2, 3])), matrix([0, 1.71828182845905, 6.38905609893065, 19.0855369231877]))
     approx.deepEqual(expm1(matrix([[0, 1], [2, 3]])), matrix([[0, 1.71828182845905], [6.38905609893065, 19.0855369231877]]))
-    approx.deepEqual(expm1(sparse([[0, 1], [2, 3]])), sparse([[0, 1.71828182845905], [6.38905609893065, 19.0855369231877]]))
   })
 })

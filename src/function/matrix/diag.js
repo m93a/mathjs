@@ -4,7 +4,7 @@ import { isInteger } from '../../utils/number.js'
 import { factory } from '../../utils/factory.js'
 
 const name = 'diag'
-const dependencies = ['typed', 'matrix', 'DenseMatrix', 'SparseMatrix']
+const dependencies = ['typed', 'matrix', 'DenseMatrix']
 
 export const createDiag = /* #__PURE__ */ factory(name, dependencies, ({ typed, matrix, DenseMatrix, SparseMatrix }) => {
   /**
@@ -132,9 +132,7 @@ export const createDiag = /* #__PURE__ */ factory(name, dependencies, ({ typed, 
     }
 
     // create diagonal matrix
-    const m = format === 'sparse'
-      ? SparseMatrix.diagonal(ms, x, k)
-      : DenseMatrix.diagonal(ms, x, k)
+    const m = DenseMatrix.diagonal(ms, x, k)
     // check we need to return a matrix
     return format !== null ? m : m.valueOf()
   }

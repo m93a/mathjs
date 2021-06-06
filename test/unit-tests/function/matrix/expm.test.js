@@ -68,21 +68,4 @@ describe('expm', function () {
         [0, 2.718255]]
     ))
   })
-
-  it('should work on SparseMatrix', function () {
-    approx.deepEqual(expm(
-      math.sparse(
-        [[0, 6, 0, 0],
-          [0, 0, 6, 0],
-          [0, 0, 0, 6],
-          [0, 0, 0, 0]]
-      )
-    ),
-    math.sparse(
-      [[1, 6, 18, 36],
-        [0, 1, 6, 18],
-        [0, 0, 1, 6],
-        [0, 0, 0, 1]]
-    ))
-  })
 })

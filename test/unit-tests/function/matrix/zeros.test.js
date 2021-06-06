@@ -12,12 +12,6 @@ describe('zeros', function () {
     assert.deepStrictEqual(zeros(matrix([])), matrix())
   })
 
-  it('should create an empty matrix, sparse', function () {
-    assert.deepStrictEqual(zeros('sparse'), matrix('sparse'))
-    assert.deepStrictEqual(zeros([], 'sparse'), matrix([], 'sparse'))
-    assert.deepStrictEqual(zeros(matrix([]), 'sparse'), matrix('sparse'))
-  })
-
   it('should create a vector with zeros', function () {
     assert.deepStrictEqual(zeros(3), matrix([0, 0, 0]))
     assert.deepStrictEqual(zeros(matrix([4])), matrix([0, 0, 0, 0]))

@@ -1,14 +1,14 @@
 import { factory } from '../../../utils/factory.js'
 
 const name = 'matrix'
-const dependencies = ['typed', 'Matrix', 'DenseMatrix', 'SparseMatrix']
+const dependencies = ['typed', 'Matrix', 'DenseMatrix']
 
 export const createMatrix = /* #__PURE__ */ factory(name, dependencies, ({ typed, Matrix, DenseMatrix, SparseMatrix }) => {
   /**
    * Create a Matrix. The function creates a new `math.Matrix` object from
    * an `Array`. A Matrix has utility functions to manipulate the data in the
    * matrix, like getting the size and getting or setting values in the matrix.
-   * Supported storage formats are 'dense' and 'sparse'.
+   * Supported storage formats are 'dense'.
    *
    * Syntax:
    *
@@ -16,8 +16,6 @@ export const createMatrix = /* #__PURE__ */ factory(name, dependencies, ({ typed
    *    math.matrix(data)                     // creates a matrix with initial data using default storage format (dense).
    *    math.matrix('dense')                  // creates an empty matrix using the given storage format.
    *    math.matrix(data, 'dense')            // creates a matrix with initial data using the given storage format.
-   *    math.matrix(data, 'sparse')           // creates a sparse matrix with initial data.
-   *    math.matrix(data, 'sparse', 'number') // creates a sparse matrix with initial data, number data type.
    *
    * Examples:
    *
@@ -32,7 +30,7 @@ export const createMatrix = /* #__PURE__ */ factory(name, dependencies, ({ typed
    *    bignumber, boolean, complex, index, number, string, unit, sparse
    *
    * @param {Array | Matrix} [data]    A multi dimensional array
-   * @param {string} [format]          The Matrix storage format, either `'dense'` or `'sparse'`
+   * @param {string} [format]          The Matrix storage format, just `'dense'`
    * @param {string} [datatype]        Type of the values
    *
    * @return {Matrix} The created matrix
@@ -75,10 +73,6 @@ export const createMatrix = /* #__PURE__ */ factory(name, dependencies, ({ typed
     // get storage format constructor
     if (format === 'dense' || format === 'default' || format === undefined) {
       return new DenseMatrix(data, datatype)
-    }
-
-    if (format === 'sparse') {
-      return new SparseMatrix(data, datatype)
     }
 
     throw new TypeError('Unknown matrix type ' + JSON.stringify(format) + '.')

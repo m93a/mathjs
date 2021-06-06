@@ -6,7 +6,6 @@ import math from '../../../../src/defaultInstance.js'
 const bignumber = math.bignumber
 const fraction = math.fraction
 const matrix = math.matrix
-const sparse = math.sparse
 const round = math.round
 
 describe('round', function () {
@@ -155,18 +154,6 @@ describe('round', function () {
       assert.deepStrictEqual(round(matrix([[1.7777, 2.3456], [-90.8272, 0]]), 3), matrix([[1.778, 2.346], [-90.827, 0]]))
       assert.deepStrictEqual(round(3.12385, matrix([[2, 3], [0, 2]])), matrix([[3.12, 3.124], [3, 3.12]]))
       assert.deepStrictEqual(round(0.0, matrix([2, 3])), matrix([0, 0]))
-    })
-  })
-
-  describe('SparseMatrix', function () {
-    it('should round sparse matrix', function () {
-      assert.deepStrictEqual(round(sparse([[1.7, 0], [8.987, -3.565]])), sparse([[2, 0], [9, -4]]))
-    })
-
-    it('should round sparse matrix and scalar', function () {
-      assert.deepStrictEqual(round(sparse([[1.7777, 2.3456], [-90.8272, 0]]), 3), sparse([[1.778, 2.346], [-90.827, 0]]))
-      assert.deepStrictEqual(round(3.12385, sparse([[2, 3], [0, 2]])), matrix([[3.12, 3.124], [3, 3.12]]))
-      assert.deepStrictEqual(round(0.0, sparse([2, 3])), sparse([0, 0]))
     })
   })
 })

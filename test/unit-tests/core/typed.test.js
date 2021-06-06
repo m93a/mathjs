@@ -53,7 +53,6 @@ describe('typed', function () {
 
   it('should test whether a value is a Matrix', function () {
     assert.strictEqual(math.isMatrix(math.matrix()), true)
-    assert.strictEqual(math.isMatrix(math.matrix([], 'sparse')), true)
     assert.strictEqual(math.isMatrix(math2.matrix()), true)
     assert.strictEqual(math.isMatrix({ isMatrix: true }), false)
     assert.strictEqual(math.isMatrix(2), false)
@@ -62,20 +61,10 @@ describe('typed', function () {
 
   it('should test whether a value is a DenseMatrix', function () {
     assert.strictEqual(math.isDenseMatrix(math.matrix()), true)
-    assert.strictEqual(math.isDenseMatrix(math.matrix([], 'sparse')), false)
     assert.strictEqual(math.isDenseMatrix(math2.matrix()), true)
     assert.strictEqual(math.isDenseMatrix({ isDenseMatrix: true }), false)
     assert.strictEqual(math.isDenseMatrix(2), false)
     assert.strictEqual(math.isDenseMatrix(), false)
-  })
-
-  it('should test whether a value is a SparseMatrix', function () {
-    assert.strictEqual(math.isSparseMatrix(math.matrix()), false)
-    assert.strictEqual(math.isSparseMatrix(math.matrix([], 'sparse')), true)
-    assert.strictEqual(math.isSparseMatrix(math2.matrix([], 'sparse')), true)
-    assert.strictEqual(math.isSparseMatrix({ isSparseMatrix: true }), false)
-    assert.strictEqual(math.isSparseMatrix(2), false)
-    assert.strictEqual(math.isSparseMatrix(), false)
   })
 
   it('should test whether a value is a Range', function () {

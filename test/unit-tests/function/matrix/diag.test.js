@@ -13,11 +13,6 @@ describe('diag', function () {
     assert.deepStrictEqual(math.diag(math.matrix([[1, 2, 3], [4, 5, 6]], 'dense')), math.matrix([1, 5], 'dense'))
   })
 
-  it('should return a diagonal matrix on the default diagonal, sparse matrix', function () {
-    assert.deepStrictEqual(math.diag([1, 2, 3], 'sparse'), math.matrix([[1, 0, 0], [0, 2, 0], [0, 0, 3]], 'sparse'))
-    assert.deepStrictEqual(math.diag(math.matrix([[1, 2, 3], [4, 5, 6]], 'sparse')), math.matrix([1, 5], 'sparse'))
-  })
-
   it('should return a array output on array input', function () {
     assert.deepStrictEqual(math.diag([1, 2]), [[1, 0], [0, 2]])
   })

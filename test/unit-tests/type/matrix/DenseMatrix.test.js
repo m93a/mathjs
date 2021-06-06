@@ -2,7 +2,6 @@ import assert from 'assert'
 import math from '../../../../src/defaultInstance.js'
 const Matrix = math.Matrix
 const DenseMatrix = math.DenseMatrix
-const SparseMatrix = math.SparseMatrix
 const Complex = math.Complex
 const Range = math.Range
 
@@ -85,33 +84,6 @@ describe('DenseMatrix', function () {
       const m2 = new DenseMatrix(m1)
       assert.deepStrictEqual(m1._size, m2._size)
       assert.deepStrictEqual(m1._data, m2._data)
-      assert.deepStrictEqual(m1._datatype, m2._datatype)
-    })
-
-    it('should create a DenseMatrix from a SparseMatrix', function () {
-      const m1 = new SparseMatrix(
-        [
-          [1, 2, 3],
-          [4, 5, 6],
-          [7, 8, 9],
-          [10, 11, 12]
-        ])
-      const m2 = new DenseMatrix(m1)
-      assert.deepStrictEqual(m1.size(), m2.size())
-      assert.deepStrictEqual(m1.toArray(), m2.toArray())
-    })
-
-    it('should create a DenseMatrix from a SparseMatrix, number datatype', function () {
-      const m1 = new SparseMatrix(
-        [
-          [1, 2, 3],
-          [4, 5, 6],
-          [7, 8, 9],
-          [10, 11, 12]
-        ], 'number')
-      const m2 = new DenseMatrix(m1)
-      assert.deepStrictEqual(m1.size(), m2.size())
-      assert.deepStrictEqual(m1.toArray(), m2.toArray())
       assert.deepStrictEqual(m1._datatype, m2._datatype)
     })
 
@@ -304,12 +276,6 @@ describe('DenseMatrix', function () {
     it('should resize the matrix with DenseMatrix as input', function () {
       const m = new DenseMatrix([[1, 2, 3], [4, 5, 6]])
       m.resize(new DenseMatrix([2, 4]))
-      assert.deepStrictEqual(m.valueOf(), [[1, 2, 3, 0], [4, 5, 6, 0]])
-    })
-
-    it('should resize the matrix with SparseMatrix as input', function () {
-      const m = new DenseMatrix([[1, 2, 3], [4, 5, 6]])
-      m.resize(new SparseMatrix([2, 4]))
       assert.deepStrictEqual(m.valueOf(), [[1, 2, 3, 0], [4, 5, 6, 0]])
     })
 
