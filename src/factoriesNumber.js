@@ -108,7 +108,6 @@ export { createRoundNumber as createRound } from './function/arithmetic/round.js
 export const createLog = /* #__PURE__ */ createNumberFactory('log', logNumber)
 export const createLog1p = /* #__PURE__ */ createNumberFactory('log1p', log1pNumber)
 export const createAdd = /* #__PURE__ */ createNumberFactory('add', addNumber)
-export { createHypot } from './function/arithmetic/hypot.js'
 export const createNorm = /* #__PURE__ */ createNumberFactory('norm', normNumber)
 export const createDivide = /* #__PURE__ */ createNumberFactory('divide', divideNumber)
 
@@ -147,7 +146,6 @@ export const createOr = /* #__PURE__ */ createNumberFactory('or', orNumber)
 export const createXor = /* #__PURE__ */ createNumberFactory('xor', xorNumber)
 
 // matrix
-export { createApply } from './function/matrix/apply.js'
 export { createFilter } from './function/matrix/filter.js'
 export { createForEach } from './function/matrix/forEach.js'
 export { createMap } from './function/matrix/map.js'

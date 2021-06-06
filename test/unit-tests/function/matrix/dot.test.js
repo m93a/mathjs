@@ -81,8 +81,5 @@ describe('dot', function () {
   it('should be antilinear in the first argument', function () {
     const I = complex(0, 1)
     assert.deepStrictEqual(dot([I, 2], [1, I]), I)
-
-    const v = matrix([2, I, 1])
-    assert.deepStrictEqual(dot(v, v).sqrt(), complex(math.norm(v)))
   })
 })
