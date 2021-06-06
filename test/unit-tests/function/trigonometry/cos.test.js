@@ -4,7 +4,6 @@ import approx from '../../../../tools/approx.js'
 const pi = math.pi
 const complex = math.complex
 const matrix = math.matrix
-const unit = math.unit
 const cos = math.cos
 const bigmath = math.create({ number: 'BigNumber', precision: 15 })
 const biggermath = math.create({ number: 'BigNumber', precision: 238 })
@@ -79,20 +78,6 @@ describe('cos', function () {
     approx.deepEqual(cos(complex('1')), complex(0.540302305868140, 0))
     approx.deepEqual(cos(complex('1+i')), complex(0.833730025131149, -0.988897705762865))
     approx.deepEqual(cos(complex('1e-10+1e-10i')), complex('1-1e-20i'))
-  })
-
-  it('should return the cosine of an angle', function () {
-    approx.equal(cos(unit('45deg')), 0.707106781186548)
-    approx.equal(cos(unit('-135deg')), -0.707106781186548)
-
-    assert(math.isBigNumber(cos(unit(math.bignumber(45), 'deg'))))
-    approx.equal(cos(unit(math.bignumber(45), 'deg')).toNumber(), 0.707106781186548)
-
-    approx.deepEqual(cos(unit(complex(1, 1), 'rad')), complex(0.833730025131149, -0.988897705762865))
-  })
-
-  it('should throw an error if called with an invalid unit', function () {
-    assert.throws(function () { cos(unit('5 celsius')) })
   })
 
   it('should throw an error if called with a string', function () {

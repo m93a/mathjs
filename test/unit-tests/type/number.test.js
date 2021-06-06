@@ -31,10 +31,6 @@ describe('number', function () {
     approx.equal(number(-3), -3)
   })
 
-  it('should convert a unit to a number', function () {
-    approx.equal(number(math.unit('52cm'), 'm'), 0.52)
-  })
-
   it('should parse the string if called with a valid string', function () {
     approx.equal(number('2.1e3'), 2100)
     approx.equal(number(' 2.1e-3 '), 0.0021)
@@ -61,22 +57,5 @@ describe('number', function () {
 
   it('should throw an error if called with a complex number', function () {
     assert.throws(function () { number(math.complex(2, 3)) }, TypeError)
-  })
-
-  it('should throw an error with wrong type of arguments', function () {
-    assert.throws(function () { number(math.unit('5cm')) }, /Second argument with valueless unit expected/)
-    // assert.throws(function () {number(math.unit('5cm'), 2)}, TypeError); // FIXME: this should also throw an error
-    assert.throws(function () { number(math.unit('5cm'), new Date()) }, TypeError)
-    assert.throws(function () { number('23', 2) }, TypeError)
-  })
-
-  it('should LaTeX number', function () {
-    const expr1 = math.parse('number()')
-    const expr2 = math.parse('number(1)')
-    const expr3 = math.parse('number(1,cm)')
-
-    assert.strictEqual(expr1.toTex(), '0')
-    assert.strictEqual(expr2.toTex(), '\\left(1\\right)')
-    assert.strictEqual(expr3.toTex(), '\\left(\\left(1\\right)\\mathrm{cm}\\right)')
   })
 })

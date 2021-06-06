@@ -110,14 +110,6 @@ describe('unequal', function () {
     assert.strictEqual(unequal(1, math.fraction(1, 3)), true)
     assert.strictEqual(unequal(math.fraction(2), 2), false)
   })
-
-  it('should compare two quantitites of the same unit correctly', function () {
-    assert.strictEqual(unequal(unit('100cm'), unit('10inch')), true)
-    assert.strictEqual(unequal(unit('100cm'), unit('1m')), false)
-    // assert.strictEqual(unequal(unit('12inch'), unit('1foot')), false); // round-off error :(
-    // assert.strictEqual(unequal(unit('2.54cm'), unit('1inch')), false); // round-off error :(
-  })
-
   it('should compare null', function () {
     assert.strictEqual(unequal(null, null), false)
     assert.strictEqual(unequal(null, undefined), true)

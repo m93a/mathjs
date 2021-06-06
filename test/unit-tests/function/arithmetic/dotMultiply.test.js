@@ -44,14 +44,6 @@ describe('dotMultiply', function () {
     approx.deepEqual(divide(complex(-5, 12), complex(2, 3)), complex(2, 3))
   })
 
-  it('should multiply a unit by a number', function () {
-    // unit
-    assert.strictEqual(dotMultiply(2, unit('5 mm')).toString(), '10 mm')
-    assert.strictEqual(dotMultiply(2, unit('5 mm')).toString(), '10 mm')
-    assert.strictEqual(dotMultiply(unit('5 mm'), 2).toString(), '10 mm')
-    assert.strictEqual(dotMultiply(unit('5 mm'), 0).toString(), '0 mm')
-  })
-
   it('should throw an error with strings', function () {
     // string
     assert.throws(function () { dotMultiply('hello', 'world') })

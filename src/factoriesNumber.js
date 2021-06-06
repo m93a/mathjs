@@ -84,9 +84,7 @@ export { createTyped } from './core/function/typed.js'
 export { createResultSet } from './type/resultset/ResultSet.js'
 export { createRangeClass } from './type/matrix/Range.js'
 export { createHelpClass } from './expression/Help.js'
-export { createChainClass } from './type/chain/Chain.js'
 export { createHelp } from './expression/function/help.js'
-export { createChain } from './type/chain/function/chain.js'
 
 // algebra
 export { createSimplify } from './function/algebra/simplify.js'
@@ -136,12 +134,6 @@ export const createBitXor = /* #__PURE__ */ createNumberFactory('bitXor', bitXor
 export const createLeftShift = /* #__PURE__ */ createNumberFactory('leftShift', leftShiftNumber)
 export const createRightArithShift = /* #__PURE__ */ createNumberFactory('rightArithShift', rightArithShiftNumber)
 export const createRightLogShift = /* #__PURE__ */ createNumberFactory('rightLogShift', rightLogShiftNumber)
-
-// combinatorics
-export { createStirlingS2 } from './function/combinatorics/stirlingS2.js'
-export { createBellNumbers } from './function/combinatorics/bellNumbers.js'
-export { createCatalan } from './function/combinatorics/catalan.js'
-export { createComposition } from './function/combinatorics/composition.js'
 
 // constants
 export {
@@ -218,13 +210,6 @@ export { createPartitionSelect } from './function/matrix/partitionSelect.js'
 // probability
 export const createCombinations = createNumberFactory('combinations', combinationsNumber)
 export const createGamma = createNumberFactory('gamma', gammaNumber)
-export { createCombinationsWithRep } from './function/probability/combinationsWithRep.js'
-export { createFactorial } from './function/probability/factorial.js'
-export { createMultinomial } from './function/probability/multinomial.js'
-export { createPermutations } from './function/probability/permutations.js'
-export { createPickRandom } from './function/probability/pickRandom.js'
-export { createRandomNumber as createRandom } from './function/probability/random.js'
-export { createRandomInt } from './function/probability/randomInt.js'
 
 // relational
 export { createEqualScalarNumber as createEqualScalar } from './function/relational/equalScalar.js'

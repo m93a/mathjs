@@ -39,13 +39,6 @@ describe('isNegative', function () {
     assert.strictEqual(isNegative(fraction(-0)), false)
   })
 
-  it('should test whether a unit is negative', function () {
-    assert.strictEqual(isNegative(unit('0 m')), false)
-    assert.strictEqual(isNegative(unit('0 kB')), false)
-    assert.strictEqual(isNegative(unit('5 cm')), false)
-    assert.strictEqual(isNegative(unit('-3 inch')), true)
-  })
-
   it('should test whether a string contains a negative value', function () {
     assert.strictEqual(isNegative('2'), false)
     assert.strictEqual(isNegative('-2'), true)

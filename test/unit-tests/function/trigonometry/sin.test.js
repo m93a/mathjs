@@ -4,7 +4,6 @@ import approx from '../../../../tools/approx.js'
 const pi = math.pi
 const complex = math.complex
 const matrix = math.matrix
-const unit = math.unit
 const sin = math.sin
 const bigmath = math.create({ precision: 242 })
 
@@ -81,20 +80,6 @@ describe('sin', function () {
     approx.deepEqual(sin(complex('1')), complex(0.841470984807897, 0))
     approx.deepEqual(sin(complex('1+i')), complex(1.298457581415977, 0.634963914784736))
     approx.deepEqual(sin(complex('1e-10i')), complex('1e-10i'))
-  })
-
-  it('should return the sine of an angle', function () {
-    approx.equal(sin(unit('45deg')), 0.707106781186548)
-    approx.equal(sin(unit('-45deg')), -0.707106781186548)
-
-    assert(math.isBigNumber(sin(unit(math.bignumber(45), 'deg'))))
-    approx.equal(sin(unit(math.bignumber(45), 'deg')).toNumber(), 0.707106781186548)
-
-    approx.deepEqual(sin(unit(complex('1+i'), 'rad')), complex(1.298457581415977, 0.634963914784736))
-  })
-
-  it('should throw an error if called with an invalid unit', function () {
-    assert.throws(function () { sin(unit('5 celsius')) })
   })
 
   it('should throw an error if called with a string', function () {

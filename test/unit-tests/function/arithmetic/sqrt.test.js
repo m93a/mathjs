@@ -59,17 +59,6 @@ describe('sqrt', function () {
     assert.deepStrictEqual(sqrt(math.complex(1e10, 1e-10)), math.complex(1e5, 5e-16))
   })
 
-  it('should return the square root of a unit', function () {
-    assert.strictEqual(sqrt(math.unit('25 m^2/s^2')).toString(), '5 m / s')
-    assert.strictEqual(sqrt(math.unit('4 kg')).toString(), '2 kg^0.5')
-  })
-
-  it('should return a Unit with a Complex value when computing the square root of a negative unit', function () {
-    // Update this when support for complex units is added
-    // assert.strictEqual(sqrt(math.unit('-25 m^2/s^2')).toString(), 'NaN m / s')
-    assert.strictEqual(math.format(sqrt(math.unit('-25 m^2/s^2')), 14), '(5i) m / s')
-  })
-
   it('should return NaN if input is NaN', function () {
     assert(isNaN(sqrt(NaN)))
   })

@@ -107,36 +107,6 @@ describe('addScalar', function () {
     assert.deepStrictEqual(add(math.complex(0, 3), '2'), math.complex(2, 3))
     assert.throws(function () { add('foo', math.complex(0, 3)) }, /Error: Cannot convert "foo" to Complex/)
   })
-
-  it('should add two measures of the same unit', function () {
-    approx.deepEqual(add(math.unit(5, 'km'), math.unit(100, 'mile')), math.unit(165.93, 'km'))
-
-    approx.deepEqual(add(math.unit(math.fraction(1, 3), 'm'), math.unit(math.fraction(1, 3), 'm')).toString(), '2/3 m')
-
-    approx.deepEqual(add(math.unit(math.complex(-3, 2), 'g'), math.unit(math.complex(5, -6), 'g')).toString(), '(2 - 4i) g')
-  })
-
-  it('should throw an error for two measures of different units', function () {
-    assert.throws(function () {
-      add(math.unit(5, 'km'), math.unit(100, 'gram'))
-    })
-  })
-
-  it('should throw an error when one of the two units has undefined value', function () {
-    assert.throws(function () {
-      add(math.unit('km'), math.unit('5gram'))
-    }, /Parameter x contains a unit with undefined value/)
-    assert.throws(function () {
-      add(math.unit('5 km'), math.unit('gram'))
-    }, /Parameter y contains a unit with undefined value/)
-  })
-
-  it('should throw an error in case of a unit and non-unit argument', function () {
-    assert.throws(function () { add(math.unit('5cm'), 2) }, /TypeError: Unexpected type of argument in function add/)
-    assert.throws(function () { add(math.unit('5cm'), new Date()) }, /TypeError: Unexpected type of argument in function add/)
-    assert.throws(function () { add(new Date(), math.unit('5cm')) }, /TypeError: Unexpected type of argument in function add/)
-  })
-
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { add(1) }, /TypeError: Too few arguments/)
   })

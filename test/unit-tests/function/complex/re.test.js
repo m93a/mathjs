@@ -26,11 +26,6 @@ describe('re', function () {
     assert.deepStrictEqual(math.re(math.matrix([2, math.complex('3-6i')])).valueOf(), [2, 3])
   })
 
-  it('should throw an error when called with an unsupported type of argument', function () {
-    assert.throws(function () { math.re(new Date()) }, /TypeError: Unexpected type of argument/)
-    assert.throws(function () { math.re(math.unit('5cm')) }, /TypeError: Unexpected type of argument/)
-  })
-
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { math.re() }, /TypeError: Too few arguments/)
     assert.throws(function () { math.re(1, 2) }, /TypeError: Too many arguments/)

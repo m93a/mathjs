@@ -5,8 +5,6 @@ import math from '../../../../src/defaultInstance.js'
 
 const Index = math.Index
 const Range = math.Range
-const Help = math.Help
-const Unit = math.Unit
 const Complex = math.Complex
 const Fraction = math.Fraction
 
@@ -51,11 +49,6 @@ describe('typeOf', function () {
     assert.strictEqual(math.typeOf(math.matrix()), 'Matrix')
   })
 
-  it('should return unit type for a unit', function () {
-    assert.strictEqual(math.typeOf(new Unit(5, 'cm')), 'Unit')
-    assert.strictEqual(math.typeOf(math.unit('5cm')), 'Unit')
-  })
-
   it('should return boolean type for a boolean', function () {
     assert.strictEqual(math.typeOf(true), 'boolean')
     assert.strictEqual(math.typeOf(false), 'boolean')
@@ -81,10 +74,6 @@ describe('typeOf', function () {
   it('should return function type for a function', function () {
     function f1 () {}
     assert.strictEqual(math.typeOf(f1), 'Function')
-  })
-
-  it('should return function type for a chain', function () {
-    assert.strictEqual(math.typeOf(math.chain(3)), 'Chain')
   })
 
   it('should return function type for a ResultSet', function () {
@@ -118,10 +107,6 @@ describe('typeOf', function () {
 
   it('should return function type for a range', function () {
     assert.strictEqual(math.typeOf(new Range(0, 10)), 'Range')
-  })
-
-  it('should return function type for a help object', function () {
-    assert.strictEqual(math.typeOf(new Help({}, {})), 'Help')
   })
 
   it('should return object type for an object', function () {

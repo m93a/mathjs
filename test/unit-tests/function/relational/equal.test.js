@@ -113,13 +113,6 @@ describe('equal', function () {
     assert.strictEqual(equal(math.fraction(2), 2), true)
   })
 
-  it('should compare two units correctly', function () {
-    assert.strictEqual(equal(unit('100cm'), unit('10inch')), false)
-    assert.strictEqual(equal(unit('100cm'), unit('1m')), true)
-    assert.strictEqual(equal(unit('12inch'), unit('1foot')), true) // round-off error should be no issue
-    assert.strictEqual(equal(unit('2.54cm'), unit('1inch')), true) // round-off error should be no issue
-  })
-
   it('should compare null', function () {
     assert.strictEqual(equal(null, null), true)
     assert.strictEqual(equal(null, undefined), false)
@@ -156,18 +149,6 @@ describe('equal', function () {
     assert.strictEqual(mymath.equal(1, 0.991), true)
     assert.strictEqual(mymath.equal(mymath.bignumber(1), mymath.bignumber(0.991)), true)
     assert.strictEqual(mymath.equal(mymath.complex(1, 0), mymath.complex(0.991, 0)), true)
-  })
-
-  it('should throw an error when comparing a unit with a big number', function () {
-    assert.throws(function () { equal(math.unit('5 m'), bignumber(10)).toString() })
-  })
-
-  it('should throw an error when comparing a unit with a number', function () {
-    assert.throws(function () { equal(unit('100cm'), 22) })
-  })
-
-  it('should throw an error for two measures of different units', function () {
-    assert.throws(function () { equal(math.unit(5, 'km'), math.unit(100, 'gram')) })
   })
 
   describe('Array', function () {

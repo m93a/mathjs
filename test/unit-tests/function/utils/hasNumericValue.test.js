@@ -24,10 +24,8 @@ describe('hasNumericValue', function () {
     assert.strictEqual(hasNumericValue(''), false)
     assert.strictEqual(hasNumericValue('foo'), false)
     assert.strictEqual(hasNumericValue(math.complex(2, 3)), false)
-    assert.strictEqual(hasNumericValue(math.unit('5 cm')), false)
     assert.strictEqual(hasNumericValue(null), false)
     assert.strictEqual(hasNumericValue(undefined), false)
-    assert.strictEqual(hasNumericValue(math.parse('2+4')), false)
   })
 
   it('should test hasNumericValue element wise on an Array', function () {

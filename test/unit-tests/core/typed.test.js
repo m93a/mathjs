@@ -36,14 +36,6 @@ describe('typed', function () {
     assert.strictEqual(math.isFraction(), false)
   })
 
-  it('should test whether a value is a Unit', function () {
-    assert.strictEqual(math.isUnit(math.unit('5cm')), true)
-    assert.strictEqual(math.isUnit(math2.unit('5cm')), true)
-    assert.strictEqual(math.isUnit({ isUnit: true }), false)
-    assert.strictEqual(math.isUnit(2), false)
-    assert.strictEqual(math.isUnit(), false)
-  })
-
   it('should test whether a value is a string', function () {
     assert.strictEqual(math.isString('hello'), true)
     assert.strictEqual(math.isString({}), false)
@@ -293,12 +285,5 @@ describe('typed', function () {
     assert.strictEqual(math.isNode({ isNode: true }), false)
     assert.strictEqual(math.isNode(2), false)
     assert.strictEqual(math.isNode(), false)
-  })
-
-  it('should test whether a value is a chain', function () {
-    assert.strictEqual(math.isChain(math.chain(2)), true)
-    assert.strictEqual(math.isChain({ isChain: true }), false)
-    assert.strictEqual(math.isChain(2), false)
-    assert.strictEqual(math.isChain(), false)
   })
 })

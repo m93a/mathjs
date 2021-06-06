@@ -132,21 +132,6 @@ describe('diff', function () {
     assert.deepStrictEqual(diff(math.fraction(largeTestArray)), math.fraction(largeTestArrayDimension0))
   })
 
-  it('should be consistent with units', function () {
-    // Derived from previous smallTestArray
-    const smallUnitsArray = [[math.unit('1 cm'), math.unit('2 cm'), math.unit('3 cm'), math.unit('4 cm'), math.unit('5 cm')], [math.unit('1 cm'), math.unit('2 cm'), math.unit('3 cm'), math.unit('4 cm'), math.unit('5 cm')], [math.unit('9 cm'), math.unit('8 cm'), math.unit('7 cm'), math.unit('6 cm'), math.unit('4 cm')]]
-
-    const smallUnitsArrayDimension0 = [[math.unit('0 cm'), math.unit('0 cm'), math.unit('0 cm'), math.unit('0 cm'), math.unit('0 cm')], [math.unit('8 cm'), math.unit('6 cm'), math.unit('4 cm'), math.unit('2 cm'), math.unit('-1 cm')]]
-    const smallUnitsArrayDimension1 = [[math.unit('1 cm'), math.unit('1 cm'), math.unit('1 cm'), math.unit('1 cm')], [math.unit('1 cm'), math.unit('1 cm'), math.unit('1 cm'), math.unit('1 cm')], [math.unit('-1 cm'), math.unit('-1 cm'), math.unit('-1 cm'), math.unit('-2 cm')]]
-
-    // With Dim specified
-    approx.deepEqual(diff(smallUnitsArray, 0), smallUnitsArrayDimension0)
-    approx.deepEqual(diff(smallUnitsArray, 1), smallUnitsArrayDimension1)
-
-    // Without Dim specified
-    approx.deepEqual(diff(smallUnitsArray), smallUnitsArrayDimension0)
-  })
-
   it('should throw if input is not an array or matrix', function () {
     assert.throws(function () { diff(1, 0) }, TypeError)
   })

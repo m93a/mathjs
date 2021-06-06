@@ -202,33 +202,6 @@ describe('pow', function () {
     approx.deepEqual(pow(complex(0, 2), math.bignumber(2)), complex(-4, 0))
   })
 
-  it('should correctly calculate unit ^ number', function () {
-    assert.strictEqual(pow(unit('4 N'), 2).toString(), '16 N^2')
-    assert.strictEqual(pow(unit('0.25 m/s'), -0.5).toString(), '2 s^0.5 / m^0.5')
-    assert.strictEqual(pow(unit('123 hogshead'), 0).toString(), '1')
-  })
-
-  it('should correctly calculate unit ^ BigNumber', function () {
-    assert.strictEqual(pow(unit('4 N'), math.bignumber(2)).toString(), '16 N^2')
-    assert.deepStrictEqual(pow(unit(math.bignumber(4), 'N'), math.bignumber(2)).toNumeric('N^2'), math.bignumber(16))
-  })
-
-  it('should return a cloned value and not affect the argument', function () {
-    const unit1 = unit('2 m')
-    const unit2 = pow(unit1, 2)
-
-    assert.strictEqual(unit1.toString(), '2 m')
-    assert.strictEqual(unit2.toString(), '4 m^2')
-  })
-
-  it('should return a valuelessUnit when calculating valuelessUnit ^ number', function () {
-    assert.strictEqual(pow(unit('kg^0.5 m^0.5 s^-1'), 2).toString(), '(kg m) / s^2')
-  })
-
-  it('should throw an error when doing number ^ unit', function () {
-    assert.throws(function () { pow(2, unit('5cm')) })
-  })
-
   it('should throw an error if used with a string', function () {
     assert.throws(function () { pow('text', 2) })
     assert.throws(function () { pow(2, 'text') })

@@ -65,13 +65,6 @@ describe('replacer', function () {
     assert.deepStrictEqual(JSON.stringify(r, replacer), json)
   })
 
-  it('should stringify a Unit', function () {
-    const u = new math.Unit(5, 'cm')
-    const json = '{"mathjs":"Unit","value":5,"unit":"cm","fixPrefix":false}'
-    assert.deepStrictEqual(JSON.stringify(u), json)
-    assert.deepStrictEqual(JSON.stringify(u, replacer), json)
-  })
-
   it('should stringify a Matrix, dense', function () {
     const m = math.matrix([[1, 2], [3, 4]], 'dense')
     const json = '{"mathjs":"DenseMatrix","data":[[1,2],[3,4]],"size":[2,2]}'
@@ -111,13 +104,6 @@ describe('replacer', function () {
 
     assert.deepStrictEqual(JSON.stringify(m), json)
     assert.deepStrictEqual(JSON.stringify(m, replacer), json)
-  })
-
-  it('should stringify a Chain', function () {
-    const c = math.chain(2.3)
-    const json = '{"mathjs":"Chain","value":2.3}'
-    assert.deepStrictEqual(JSON.stringify(c), json)
-    assert.deepStrictEqual(JSON.stringify(c, replacer), json)
   })
 
   it('should stringify a node tree', function () {

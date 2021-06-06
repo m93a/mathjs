@@ -63,10 +63,6 @@ describe('complex', function () {
     assert.deepStrictEqual(complex(true), new math.Complex(1, 0))
   })
 
-  it('should throw an error if called with a unit', function () {
-    assert.throws(function () { complex(math.unit('5cm')) }, /TypeError: Unexpected type of argument in function complex/)
-  })
-
   it('should accept two numbers as arguments', function () {
     assert.deepStrictEqual(complex(2, 3), new math.Complex(2, 3))
     assert.deepStrictEqual(complex(2, -3), new math.Complex(2, -3))

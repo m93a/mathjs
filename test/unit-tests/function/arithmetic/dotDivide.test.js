@@ -47,21 +47,6 @@ describe('dotDivide', function () {
     approx.deepEqual(dotDivide(4, complex('1+2i')), complex('0.8 - 1.6i'))
   })
 
-  it('should divide a unit by a number', function () {
-    assert.strictEqual(dotDivide(math.unit('5 m'), 10).toString(), '0.5 m')
-  })
-
-  it('should divide a number by a unit', function () {
-    assert.strictEqual(dotDivide(10, math.unit('5 m')).toString(), '2 m^-1')
-  })
-
-  /*
-  // This is supported not --ericman314
-  it('should throw an error if dividing a number by a unit', function() {
-    assert.throws(function () {dotDivide(10, math.unit('5 m')).toString()})
-  });
-  */
-
   describe('Array', function () {
     it('should divide all the elements of a array by one number', function () {
       assert.deepStrictEqual(dotDivide([2, 4, 6], 2), [1, 2, 3])

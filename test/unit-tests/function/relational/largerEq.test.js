@@ -6,7 +6,6 @@ const bignumber = math.bignumber
 const complex = math.complex
 const matrix = math.matrix
 const sparse = math.sparse
-const unit = math.unit
 const largerEq = math.largerEq
 
 describe('largerEq', function () {
@@ -85,13 +84,6 @@ describe('largerEq', function () {
     assert.strictEqual(largerEq(math.fraction(2), 2), true)
   })
 
-  it('should compare two units correctly', function () {
-    assert.strictEqual(largerEq(unit('100cm'), unit('10inch')), true)
-    assert.strictEqual(largerEq(unit('99cm'), unit('1m')), false)
-    // assert.strictEqual(largerEq(unit('100cm'), unit('1m')), true); // dangerous, round-off errors
-    assert.strictEqual(largerEq(unit('101cm'), unit('1m')), true)
-  })
-
   it('should apply configuration option epsilon', function () {
     const mymath = math.create()
     assert.strictEqual(mymath.largerEq(1, 1.01), false)
@@ -100,18 +92,6 @@ describe('largerEq', function () {
     mymath.config({ epsilon: 1e-2 })
     assert.strictEqual(mymath.largerEq(1, 1.01), true)
     assert.strictEqual(mymath.largerEq(mymath.bignumber(1), mymath.bignumber(1.01)), true)
-  })
-
-  it('should throw an error if comparing a unit with a number', function () {
-    assert.throws(function () { largerEq(unit('100cm'), 22) })
-  })
-
-  it('should throw an error for two measures of different units', function () {
-    assert.throws(function () { largerEq(math.unit(5, 'km'), math.unit(100, 'gram')) })
-  })
-
-  it('should throw an error if comparing a unit with a bignumber', function () {
-    assert.throws(function () { largerEq(unit('100cm'), bignumber(22)) })
   })
 
   it('should compare two strings by their numerical value', function () {

@@ -60,16 +60,6 @@ describe('reviver', function () {
     assert.deepStrictEqual(obj, r)
   })
 
-  it('should parse a stringified Unit', function () {
-    const json = '{"mathjs":"Unit","value":5,"unit":"cm","fixPrefix":false}'
-    const u = new math.Unit(5, 'cm')
-
-    const obj = JSON.parse(json, reviver)
-
-    assert(obj instanceof math.Unit)
-    assert.deepStrictEqual(obj, u)
-  })
-
   it('should parse a stringified Range (2)', function () {
     const json = '{"mathjs":"Range","start":2,"end":10,"step":2}'
     const r = new math.Range(2, 10, 2)
@@ -153,15 +143,6 @@ describe('reviver', function () {
 
     assert(obj instanceof math.Help)
     assert.deepStrictEqual(obj, h)
-  })
-
-  it('should parse a stringified Chain', function () {
-    const json = '{"mathjs":"Chain","value":2.3}'
-    const c = math.chain(2.3)
-    const obj = JSON.parse(json, reviver)
-
-    assert(obj instanceof math.Chain)
-    assert.deepStrictEqual(obj, c)
   })
 
   it('should parse a stringified node tree', function () {

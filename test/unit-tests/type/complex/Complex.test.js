@@ -214,15 +214,6 @@ describe('Complex', function () {
       assert(way1.equals(way2))
     })
 
-    it('should accept angle units for phi properly', function () {
-      const fromDeg = Complex.fromPolar(1, new Unit(90, 'deg'))
-      const fromRad = Complex.fromPolar(1, new Unit(0, 'rad'))
-      const fromGrad = Complex.fromPolar(1, new Unit(100, 'grad'))
-      assert.strictEqual(fromDeg.im, 1)
-      assert.strictEqual(fromGrad.im, 1)
-      assert.strictEqual(fromRad.im, 0)
-    })
-
     it('should only accept an object with r and phi keys for 1 argument', function () {
       assert.throws(function () { Complex({}) }, /Invalid Param/)
       assert.throws(function () { Complex({ r: 1 }) }, /Invalid Param/)

@@ -57,10 +57,6 @@ describe('customs', function () {
       assert.strictEqual(isSafeMethod(complex, 'sqrt'), true)
       assert.strictEqual(isSafeMethod(complex, 'toString'), true)
 
-      const unit = math.unit('5cm')
-      assert.strictEqual(isSafeMethod(unit, 'toNumeric'), true)
-      assert.strictEqual(isSafeMethod(unit, 'toString'), true)
-
       // extend the class instance with a custom method
       const object = math.matrix()
       object.foo = function () {}
@@ -166,8 +162,6 @@ describe('customs', function () {
     assert.strictEqual(isPlainObject(a), true)
     assert.strictEqual(isPlainObject(b), true)
 
-    assert.strictEqual(isPlainObject(math.unit('5cm')), false)
-    assert.strictEqual(isPlainObject(math.unit('5cm')), false)
     assert.strictEqual(isPlainObject([]), false)
     // assert.strictEqual(isPlainObject (math.complex()), false); // FIXME: shouldn't treat Complex as a plain object (it is a plain object which has __proto__ overridden)
     assert.strictEqual(isPlainObject(math.matrix()), false)

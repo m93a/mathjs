@@ -36,14 +36,6 @@ describe('isNegative', function () {
     assert.strictEqual(isNaN(fraction(0)), false)
   })
 
-  it('should test whether a unit is NaN', function () {
-    assert.strictEqual(isNaN(new Unit(0, 'm')), false)
-    assert.strictEqual(isNaN(new Unit(0, 'kB')), false)
-    assert.strictEqual(isNaN(new Unit(5, 'cm')), false)
-    assert.strictEqual(isNaN(new Unit(-3, 'inch')), false)
-    assert.strictEqual(isNaN(new Unit(NaN, 'inch')), true)
-  })
-
   it('should test whether a complex number contains NaN', function () {
     assert.strictEqual(isNaN(complex(0, 0)), false)
     assert.strictEqual(isNaN(complex(NaN, 0)), true)

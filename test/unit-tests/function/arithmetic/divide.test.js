@@ -108,59 +108,6 @@ describe('divide', function () {
     assert.deepStrictEqual(divide(math.fraction(1), 3), math.fraction(1, 3))
   })
 
-  it('should divide units by a number', function () {
-    assert.strictEqual(divide(math.unit('5 m'), 10).toString(), '0.5 m')
-  })
-
-  it('should divide valueless units by a number', function () {
-    assert.strictEqual(divide(math.unit('m'), 2).toString(), '0.5 m')
-  })
-
-  it('should divide a number by a unit', function () {
-    assert.strictEqual(divide(20, math.unit('4 N s')).toString(), '5 N^-1 s^-1')
-    assert.strictEqual(divide(4, math.unit('W')).toString(), '4 W^-1')
-    assert.strictEqual(divide(2.5, math.unit('1.25 mm')).toString(), '2 mm^-1')
-    assert.strictEqual(divide(10, math.unit('4 mg/s')).toString(), '2.5 s / mg')
-    assert.strictEqual(divide(10, math.unit(math.fraction(4), 'mg/s')).toString(), '5/2 s / mg')
-    assert.strictEqual(divide(math.fraction(10), math.unit(4, 'mg/s')).toString(), '5/2 s / mg')
-    assert.strictEqual(divide(math.fraction(10), math.unit(math.fraction(4), 'mg/s')).toString(), '5/2 s / mg')
-
-    approx.equal(math.format(divide(10, math.unit(math.complex(1, 2), 'm/s')), 14), '(2 - 4i) s / m')
-  })
-
-  it('should divide two units', function () {
-    assert.strictEqual(divide(math.unit('75 mi/h'), math.unit('40 mi/gal')).to('gal/minute').toString(), '0.03125 gal / minute')
-
-    const a = math.unit(math.fraction(75), 'mi/h')
-    const b = math.unit(math.fraction(40), 'mi/gal')
-    assert.strictEqual(divide(a, b).to('gal/minute').toString(), '1/32 gal / minute')
-
-    const c = math.unit(math.complex(21, 1), 'kg')
-    const d = math.unit(math.complex(2, -3), 's')
-    assert.strictEqual(divide(c, d).toString(), '(3 + 5.000000000000001i) kg / s')
-  })
-
-  it('should divide one valued unit by a valueless unit and vice-versa', function () {
-    assert.strictEqual(divide(math.unit('4 gal'), math.unit('L')).toString(), '15.141648')
-    assert.strictEqual(divide(math.unit('gal'), math.unit('4 L')).toString(), '0.946353')
-
-    assert.strictEqual(divide(math.unit('inch'), math.unit(math.fraction(1), 'cm')).toFraction(), '127/50')
-  })
-
-  it('should divide (but not simplify) two valueless units', function () {
-    assert.strictEqual(divide(math.unit('gal'), math.unit('L')).toString(), 'gal / L')
-  })
-
-  it('should divide units by a big number', function () {
-    assert.strictEqual(divide(math.unit('5 m'), bignumber(10)).toString(), '0.5 m')
-    assert.strictEqual(divide(bignumber(80), math.unit('day')).format({ precision: 50 }), '0.92592592592592592592592592592592592592592592592593 mHz')
-    assert.strictEqual(divide(bignumber(80), math.unit('1 day')).format({ precision: 50 }), '0.92592592592592592592592592592592592592592592592593 mHz')
-    assert.strictEqual(divide(math.unit('day'), bignumber(81)).format({ precision: 50 }), '0.012345679012345679012345679012345679012345679012346 day')
-    assert.strictEqual(divide(math.unit('1 day'), bignumber(81)).format({ precision: 50 }), '0.012345679012345679012345679012345679012345679012346 day')
-
-    assert.strictEqual(math.create({ number: 'BigNumber' }).evaluate('round(80 / day * 5 days, 30)').toString(), '400')
-  })
-
   it('should divide each elements in a matrix by a number', function () {
     assert.deepStrictEqual(divide([2, 4, 6], 2), [1, 2, 3])
     const a = math.matrix([[1, 2], [3, 4]])
@@ -192,17 +139,6 @@ describe('divide', function () {
     const a = math.matrix([[1, 2], [3, 4]])
     assert.throws(function () { divide(a, [[1]]) })
   })
-
-  /*
-  // These are supported now --ericman314
-  it('should throw an error if dividing a number by a unit', function() {
-    assert.throws(function () {divide(10, math.unit('5 m')).toString()})
-  })
-
-  it('should throw an error if dividing a unit by a non-number', function() {
-    assert.throws(function () {divide(math.unit('5 m'), math.unit('5cm')).toString()})
-  })
-  */
 
   it('should throw an error if there\'s wrong number of arguments', function () {
     assert.throws(function () { divide(2, 3, 4) })

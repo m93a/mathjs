@@ -70,24 +70,6 @@ describe('getMatrixDataType', function () {
     })
   })
 
-  describe('extra type Unit', function () {
-    it('should return Unit', function () {
-      const x = math.unit('5cm')
-      const unitMatrix = getMatrixDataType([[x], [x]])
-      assert.strictEqual(unitMatrix, 'Unit')
-    })
-    it('should return mixed', function () {
-      const x = math.unit('5cm')
-      const unitMatrix = getMatrixDataType([[x], [2]])
-      assert.strictEqual(unitMatrix, 'mixed')
-    })
-    it('should return undefined', function () {
-      const x = math.unit('5cm')
-      const unitMatrix = getMatrixDataType([[x], []])
-      assert.strictEqual(unitMatrix, undefined)
-    })
-  })
-
   describe('extra type Fraction', function () {
     it('should return Fraction', function () {
       const x = math.fraction(1, 3)

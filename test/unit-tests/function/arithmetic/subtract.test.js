@@ -85,40 +85,6 @@ describe('subtract', function () {
     assert.deepStrictEqual(subtract(math.fraction(1, 3), 1), math.fraction(-2, 3))
   })
 
-  it('should subtract two quantities of the same unit', function () {
-    approx.deepEqual(subtract(math.unit(5, 'km'), math.unit(100, 'mile')), math.unit(-155.93, 'km'))
-
-    assert.deepStrictEqual(subtract(math.unit(math.bignumber(5), 'km'), math.unit(math.bignumber(2), 'km')), math.unit(math.bignumber(3), 'km'))
-
-    assert.deepStrictEqual(subtract(math.unit(math.complex(10, 10), 'K'), math.unit(math.complex(3, 4), 'K')), math.unit(math.complex(7, 6), 'K'))
-    assert.deepStrictEqual(subtract(math.unit(math.complex(10, 10), 'K'), math.unit(3, 'K')), math.unit(math.complex(7, 10), 'K'))
-  })
-
-  it('should throw an error if subtracting two quantities of different units', function () {
-    assert.throws(function () {
-      subtract(math.unit(5, 'km'), math.unit(100, 'gram'))
-    })
-  })
-
-  it('should throw an error when one of the two units has undefined value', function () {
-    assert.throws(function () {
-      subtract(math.unit('km'), math.unit('5gram'))
-    }, /Parameter x contains a unit with undefined value/)
-    assert.throws(function () {
-      subtract(math.unit('5 km'), math.unit('gram'))
-    }, /Parameter y contains a unit with undefined value/)
-  })
-
-  it('should throw an error if subtracting numbers from units', function () {
-    assert.throws(function () { subtract(math.unit(5, 'km'), 2) }, TypeError)
-    assert.throws(function () { subtract(2, math.unit(5, 'km')) }, TypeError)
-  })
-
-  it('should throw an error if subtracting numbers from units', function () {
-    assert.throws(function () { subtract(math.unit(5, 'km'), bignumber(2)) }, TypeError)
-    assert.throws(function () { subtract(bignumber(2), math.unit(5, 'km')) }, TypeError)
-  })
-
   it('should throw an error when used with a string', function () {
     assert.throws(function () { subtract('hello ', 'world') })
     assert.throws(function () { subtract('str', 123) })

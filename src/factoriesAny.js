@@ -27,7 +27,6 @@ export { createMatrix } from './type/matrix/function/matrix.js'
 export { createMatrixFromFunction } from './function/matrix/matrixFromFunction.js'
 export { createMatrixFromRows } from './function/matrix/matrixFromRows.js'
 export { createMatrixFromColumns } from './function/matrix/matrixFromColumns.js'
-export { createSplitUnit } from './type/unit/function/splitUnit.js'
 export { createUnaryMinus } from './function/arithmetic/unaryMinus.js'
 export { createUnaryPlus } from './function/arithmetic/unaryPlus.js'
 export { createAbs } from './function/arithmetic/abs.js'
@@ -99,7 +98,6 @@ export { createBin } from './function/string/bin.js'
 export { createOct } from './function/string/oct.js'
 export { createHex } from './function/string/hex.js'
 export { createPrint } from './function/string/print.js'
-export { createTo } from './function/unit/to.js'
 export { createIsPrime } from './function/utils/isPrime.js'
 export { createNumeric } from './function/utils/numeric.js'
 export { createDivideScalar } from './function/arithmetic/divideScalar.js'
@@ -137,10 +135,7 @@ export { createImmutableDenseMatrixClass } from './type/matrix/ImmutableDenseMat
 export { createIndexClass } from './type/matrix/MatrixIndex.js'
 export { createFibonacciHeapClass } from './type/matrix/FibonacciHeap.js'
 export { createSpaClass } from './type/matrix/Spa.js'
-export { createUnitClass } from './type/unit/Unit.js'
-export { createUnitFunction } from './type/unit/function/unit.js'
 export { createSparse } from './type/matrix/function/sparse.js'
-export { createCreateUnit } from './type/unit/function/createUnit.js'
 export { createAcos } from './function/trigonometry/acos.js'
 export { createAcosh } from './function/trigonometry/acosh.js'
 export { createAcot } from './function/trigonometry/acot.js'
@@ -208,17 +203,13 @@ export { createQr } from './function/algebra/decomposition/qr.js'
 export { createSlu } from './function/algebra/decomposition/slu.js'
 export { createLusolve } from './function/algebra/solver/lusolve.js'
 export { createHelpClass } from './expression/Help.js'
-export { createChainClass } from './type/chain/Chain.js'
 export { createHelp } from './expression/function/help.js'
-export { createChain } from './type/chain/function/chain.js'
 export { createDet } from './function/matrix/det.js'
 export { createInv } from './function/matrix/inv.js'
 export { createEigs } from './function/matrix/eigs.js'
 export { createExpm } from './function/matrix/expm.js'
 export { createSqrtm } from './function/matrix/sqrtm.js'
 export { createDivide } from './function/arithmetic/divide.js'
-export { createDistance } from './function/geometry/distance.js'
-export { createIntersect } from './function/geometry/intersect.js'
 export { createSum } from './function/statistics/sum.js'
 export { createMean } from './function/statistics/mean.js'
 export { createMedian } from './function/statistics/median.js'
@@ -226,20 +217,6 @@ export { createMad } from './function/statistics/mad.js'
 export { createVariance } from './function/statistics/variance.js'
 export { createQuantileSeq } from './function/statistics/quantileSeq.js'
 export { createStd } from './function/statistics/std.js'
-export { createCombinations } from './function/probability/combinations.js'
-export { createCombinationsWithRep } from './function/probability/combinationsWithRep.js'
-export { createGamma } from './function/probability/gamma.js'
-export { createFactorial } from './function/probability/factorial.js'
-export { createKldivergence } from './function/probability/kldivergence.js'
-export { createMultinomial } from './function/probability/multinomial.js'
-export { createPermutations } from './function/probability/permutations.js'
-export { createPickRandom } from './function/probability/pickRandom.js'
-export { createRandom } from './function/probability/random.js'
-export { createRandomInt } from './function/probability/randomInt.js'
-export { createStirlingS2 } from './function/combinatorics/stirlingS2.js'
-export { createBellNumbers } from './function/combinatorics/bellNumbers.js'
-export { createCatalan } from './function/combinatorics/catalan.js'
-export { createComposition } from './function/combinatorics/composition.js'
 export { createSimplify } from './function/algebra/simplify.js'
 export { createDerivative } from './function/algebra/derivative.js'
 export { createRationalize } from './function/algebra/rationalize.js'
@@ -266,58 +243,6 @@ export {
   createTrue,
   createVersion
 } from './constants.js'
-export {
-  createAtomicMass,
-  createAvogadro,
-  createBohrMagneton,
-  createBohrRadius,
-  createBoltzmann,
-  createClassicalElectronRadius,
-  createConductanceQuantum,
-  createCoulomb,
-  createDeuteronMass,
-  createEfimovFactor,
-  createElectricConstant,
-  createElectronMass,
-  createElementaryCharge,
-  createFaraday,
-  createFermiCoupling,
-  createFineStructure,
-  createFirstRadiation,
-  createGasConstant,
-  createGravitationConstant,
-  createGravity,
-  createHartreeEnergy,
-  createInverseConductanceQuantum,
-  createKlitzing,
-  createLoschmidt,
-  createMagneticConstant,
-  createMagneticFluxQuantum,
-  createMolarMass,
-  createMolarMassC12,
-  createMolarPlanckConstant,
-  createMolarVolume,
-  createNeutronMass,
-  createNuclearMagneton,
-  createPlanckCharge,
-  createPlanckConstant,
-  createPlanckLength,
-  createPlanckMass,
-  createPlanckTemperature,
-  createPlanckTime,
-  createProtonMass,
-  createQuantumOfCirculation,
-  createReducedPlanckConstant,
-  createRydberg,
-  createSackurTetrode,
-  createSecondRadiation,
-  createSpeedOfLight,
-  createStefanBoltzmann,
-  createThomsonCrossSection,
-  createVacuumImpedance,
-  createWeakMixingAngle,
-  createWienDisplacement
-} from './type/unit/physicalConstants.js'
 export { createApplyTransform } from './expression/transform/apply.transform.js'
 export { createColumnTransform } from './expression/transform/column.transform.js'
 export { createFilterTransform } from './expression/transform/filter.transform.js'

@@ -57,10 +57,6 @@ describe('arg', function () {
     assert.throws(function () { arg('string') })
   })
 
-  it('should throw an error if used with a unit', function () {
-    assert.throws(function () { arg(math.unit('5cm')) })
-  })
-
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { arg() }, /TypeError: Too few arguments/)
     assert.throws(function () { arg(1, 2) }, /TypeError: Too many arguments/)

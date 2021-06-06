@@ -46,10 +46,6 @@ describe('string', function () {
     assert.strictEqual(string(math.complex(2, 3)), '2 + 3i')
   })
 
-  it('should convert a unit to string', function () {
-    assert.strictEqual(string(math.unit('5cm')), '5 cm')
-  })
-
   it('should throw an error if called with wrong number of arguments', function () {
     assert.throws(function () { string(1, 2) }, /TypeError: Too many arguments/)
     assert.throws(function () { string(1, 2, 3) }, /TypeError: Too many arguments/)

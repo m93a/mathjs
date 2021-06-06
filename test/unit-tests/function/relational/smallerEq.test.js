@@ -88,13 +88,6 @@ describe('smallerEq', function () {
     assert.strictEqual(smallerEq(math.fraction(2), 2), true)
   })
 
-  it('should compare two measures of the same unit correctly', function () {
-    assert.strictEqual(smallerEq(unit('100cm'), unit('10inch')), false)
-    assert.strictEqual(smallerEq(unit('99cm'), unit('1m')), true)
-    // assert.strictEqual(smallerEq(unit('100cm'), unit('1m')), true); // dangerous, round-off errors
-    assert.strictEqual(smallerEq(unit('101cm'), unit('1m')), false)
-  })
-
   it('should apply configuration option epsilon', function () {
     const mymath = math.create()
     assert.strictEqual(mymath.smallerEq(1.01, 1), false)
@@ -103,20 +96,6 @@ describe('smallerEq', function () {
     mymath.config({ epsilon: 1e-2 })
     assert.strictEqual(mymath.smallerEq(1.01, 1), true)
     assert.strictEqual(mymath.smallerEq(mymath.bignumber(1.01), mymath.bignumber(1)), true)
-  })
-
-  it('should throw an error if comparing a unit with a number', function () {
-    assert.throws(function () { smallerEq(unit('100cm'), 22) })
-    assert.throws(function () { smallerEq(22, unit('100cm')) })
-  })
-
-  it('should throw an error for two measures of different units', function () {
-    assert.throws(function () { smallerEq(math.unit(5, 'km'), math.unit(100, 'gram')) })
-  })
-
-  it('should throw an error if comparing a unit with a bignumber', function () {
-    assert.throws(function () { smallerEq(unit('100cm'), bignumber(22)) })
-    assert.throws(function () { smallerEq(bignumber(22), unit('100cm')) })
   })
 
   it('should compare two strings by their numerical value', function () {

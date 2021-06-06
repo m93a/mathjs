@@ -31,11 +31,6 @@ describe('im', function () {
     assert.deepStrictEqual(math.im(math.matrix([2, math.complex('3-6i')])).valueOf(), [0, -6])
   })
 
-  it('should throw an error when called with an unsupported type of argument', function () {
-    assert.throws(function () { math.im(new Date()) }, /TypeError: Unexpected type of argument/)
-    assert.throws(function () { math.im(math.unit('5cm')) }, /TypeError: Unexpected type of argument/)
-  })
-
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { math.im() }, /TypeError: Too few arguments/)
     assert.throws(function () { math.im(1, 2) }, /TypeError: Too many arguments/)

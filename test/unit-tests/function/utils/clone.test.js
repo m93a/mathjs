@@ -47,14 +47,6 @@ describe('clone', function () {
     assert.strictEqual(b.toString(), '2 + 3i')
   })
 
-  it('should clone a unit', function () {
-    const a = math.unit('5mm')
-    const b = math.clone(a)
-    a.value = 10
-    assert.strictEqual(a.toString(), '10 m')
-    assert.strictEqual(b.toString(), '5 mm')
-  })
-
   it('should clone a fraction', function () {
     const a = math.fraction(2, 3)
     const b = math.clone(a)

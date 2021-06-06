@@ -69,23 +69,6 @@ describe('abs', function () {
     assert.deepStrictEqual(a1.valueOf(), [2, 1, 0, 1, 2])
   })
 
-  it('should return the absolute value of a unit', function () {
-    let u = abs(unit('5 m'))
-    assert.strictEqual(u.toString(), '5 m')
-
-    u = abs(unit('-5 m'))
-    assert.strictEqual(u.toString(), '5 m')
-
-    u = abs(unit('-283.15 degC'))
-    assert.strictEqual(u.toString(), '-263.15 degC')
-
-    u = abs(unit(fraction(2, 3), 'm'))
-    assert.strictEqual(u.toString(), '2/3 m')
-
-    u = abs(unit(complex(-4, 3), 'in'))
-    assert.strictEqual(u.toString(), '5 in')
-  })
-
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { abs() }, /TypeError: Too few arguments/)
     assert.throws(function () { abs(1, 2) }, /TypeError: Too many arguments/)

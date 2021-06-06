@@ -59,14 +59,6 @@ describe('isZero', function () {
     assert.strictEqual(isZero(complex(2, 4)), false)
   })
 
-  it('should test whether a unit is zero', function () {
-    assert.strictEqual(isZero(unit('0 m')), true)
-    assert.strictEqual(isZero(unit('0 kB')), true)
-
-    assert.strictEqual(isZero(unit('5 cm')), false)
-    assert.strictEqual(isZero(unit('-3 inch')), false)
-  })
-
   it('should test isZero element wise on an Array', function () {
     assert.deepStrictEqual(isZero([0, 5, 0, -3]), [true, false, true, false])
   })
