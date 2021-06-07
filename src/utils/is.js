@@ -12,6 +12,8 @@
 //   for security reasons, so these functions are not exposed in the expression
 //   parser.
 
+import { symbols as S } from '@m93a/arithmetic-types'
+
 export function isNumber (x) {
   return typeof x === 'number'
 }
@@ -171,6 +173,18 @@ export function isChain (x) {
   return (x && x.constructor.prototype.isChain === true) || false
 }
 
+export function isArithmeticType (x) {
+  return (x && typeof x[S.Arithmetics] === "object") || false
+}
+
+export function isAdditiveGroup (x) {
+  return (isArithmeticType(x) && x[S.Arithmetics][S.AdditiveGroup]) || false
+}
+
+export function isNormedDivisionRing (x) {
+  return (isArithmeticType(x) && x[S.Arithmetics][S.NormedDivisionRing]) || false
+}
+
 export function typeOf (x) {
   const t = typeof x
 
@@ -193,6 +207,9 @@ export function typeOf (x) {
     if (isNode(x)) return x.type
     if (isChain(x)) return 'Chain'
     if (isHelp(x)) return 'Help'
+
+    if (isNormedDivisionRing(x)) return 'NormedDivisionRing'
+    if (isAdditiveGroup(x)) return 'AdditiveGroup'
 
     return 'Object'
   }

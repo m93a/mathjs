@@ -73,7 +73,9 @@ import {
   isString,
   isSymbolNode,
   isUndefined,
-  isUnit
+  isUnit,
+  isAdditiveGroup,
+  isNormedDivisionRing
 } from '../../utils/is.js'
 import typedFunction from 'typed-function'
 import { digits } from '../../utils/number.js'
@@ -147,6 +149,9 @@ export const createTyped = /* #__PURE__ */ factory('typed', dependencies, functi
     { name: 'ParenthesisNode', test: isParenthesisNode },
     { name: 'RangeNode', test: isRangeNode },
     { name: 'SymbolNode', test: isSymbolNode },
+
+    { name: 'NormedDivisionRing', test: isNormedDivisionRing },
+    { name: 'AdditiveGroup', test: isAdditiveGroup },
 
     { name: 'Map', test: isMap },
     { name: 'Object', test: isObject } // order 'Object' last, it matches on other classes too
