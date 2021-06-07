@@ -12,7 +12,21 @@
 //   for security reasons, so these functions are not exposed in the expression
 //   parser.
 
-import { symbols as S } from '@m93a/arithmetic-types'
+// normally, one would use:
+// import { symbols as S } from 'arithmetic-types'
+// however because of the building/testing system in math.js,
+// it is literally impossible to import anything in this file
+const S = {
+  Arithmetics: Symbol.for('arithmetics'),
+  AdditiveGroup: Symbol.for('arithmetics-additive-group'),
+  VectorSpace: Symbol.for('arithmetics-vector-space'),
+  NormedVectorSpace: Symbol.for('arithmetics-normed-vector-space'),
+  UnitarySpace: Symbol.for('arithmetics-unitary-space'),
+  Ring: Symbol.for('arithmetics-ring'),
+  DivisionRing: Symbol.for('arithmetics-division-ring'),
+  NormedDivisionRing: Symbol.for('arithmetics-normed-division-ring'),
+  Real: Symbol.for('arithmetics-real')
+}
 
 export function isNumber (x) {
   return typeof x === 'number'
@@ -174,7 +188,7 @@ export function isChain (x) {
 }
 
 export function isArithmeticType (x) {
-  return (x && typeof x[S.Arithmetics] === "object") || false
+  return (x && typeof x[S.Arithmetics] === 'object') || false
 }
 
 export function isAdditiveGroup (x) {
