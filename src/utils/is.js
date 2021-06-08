@@ -12,6 +12,22 @@
 //   for security reasons, so these functions are not exposed in the expression
 //   parser.
 
+// normally, one would use:
+// import { symbols as S } from 'arithmetic-types'
+// however because of the building/testing system in math.js,
+// it is literally impossible to import anything in this file
+export const S = {
+  Arithmetics: Symbol.for('arithmetics'),
+  AdditiveGroup: Symbol.for('arithmetics-additive-group'),
+  VectorSpace: Symbol.for('arithmetics-vector-space'),
+  NormedVectorSpace: Symbol.for('arithmetics-normed-vector-space'),
+  UnitarySpace: Symbol.for('arithmetics-unitary-space'),
+  Ring: Symbol.for('arithmetics-ring'),
+  DivisionRing: Symbol.for('arithmetics-division-ring'),
+  NormedDivisionRing: Symbol.for('arithmetics-normed-division-ring'),
+  Real: Symbol.for('arithmetics-real')
+}
+
 export function isNumber (x) {
   return typeof x === 'number'
 }
@@ -171,6 +187,18 @@ export function isChain (x) {
   return (x && x.constructor.prototype.isChain === true) || false
 }
 
+export function isArithmeticType (x) {
+  return isNumber(x) || (!!x && typeof x[S.Arithmetics] === 'object')
+}
+
+export function isAdditiveGroup (x) {
+  return isNumber(x) || (isArithmeticType(x) && !!x[S.Arithmetics][S.AdditiveGroup])
+}
+
+export function isNormedDivisionRing (x) {
+  return isNumber(x) || (isArithmeticType(x) && !!x[S.Arithmetics][S.NormedDivisionRing])
+}
+
 export function typeOf (x) {
   const t = typeof x
 
@@ -193,6 +221,9 @@ export function typeOf (x) {
     if (isNode(x)) return x.type
     if (isChain(x)) return 'Chain'
     if (isHelp(x)) return 'Help'
+
+    if (isNormedDivisionRing(x)) return 'NormedDivisionRing'
+    if (isAdditiveGroup(x)) return 'AdditiveGroup'
 
     return 'Object'
   }

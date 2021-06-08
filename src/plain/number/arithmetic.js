@@ -1,4 +1,59 @@
 import { isInteger, log2, log10, cbrt, expm1, sign, toFixed, log1p } from '../../utils/number.js'
+import { S } from '../../utils/is.js'
+
+const noop = x => x
+
+/** @type {import('@m93a/arithmetic-types').Real<number>} */
+export const NumberArithmetics = {
+  [S.AdditiveGroup]: true,
+  [S.Ring]: true,
+  [S.DivisionRing]: true,
+  [S.VectorSpace]: true,
+  [S.NormedVectorSpace]: true,
+  [S.NormedDivisionRing]: true,
+  [S.Real]: true,
+
+  isCommutative: true,
+
+  one: () => 1,
+  zero: () => 0,
+  epsilon: () => Number.EPSILON,
+
+  add: addNumber,
+  sub: subtractNumber,
+  mul: multiplyNumber,
+  div: divideNumber,
+  neg: unaryMinusNumber,
+  inv: x => 1 / x,
+
+  pow: powNumber,
+  exp: expNumber,
+  expm1: expm1Number,
+  log: logNumber,
+  log1p: log1pNumber,
+
+  norm: normNumber,
+  normSq: squareNumber,
+
+  isFinite: x => Number.isFinite(x),
+  isNaN: x => Number.isNaN(x),
+  equals: (a, b) => a === b,
+  approximatelyEquals: (a, b, epsilon) => Math.abs(a - b) < epsilon,
+
+  compare: (a, b) => a < b ? -1 : a > b ? 1 : 0,
+  lt: (a, b) => a < b,
+  lte: (a, b) => a <= b,
+  gte: (a, b) => a >= b,
+  gt: (a, b) => a > b,
+
+  fromReal: noop,
+  fromNumber: noop,
+  toNumber: noop,
+  conj: noop,
+  real: noop,
+  imag: x => 0,
+  scale: multiplyNumber
+}
 
 const n1 = 'number'
 const n2 = 'number, number'

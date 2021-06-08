@@ -1,4 +1,4 @@
-import Fraction from 'fraction.js'
+import Fraction from '@m93a/fraction.js'
 import { factory } from '../../utils/factory.js'
 
 const name = 'Fraction'
