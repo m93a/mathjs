@@ -19,13 +19,15 @@ export const createAddScalar = /* #__PURE__ */ factory(name, dependencies, ({ ty
    * @private
    */
   return typed(name, {
-    'number, number': addNumber,
-
     'NormedDivisionRing, NormedDivisionRing': function (x, y) {
       const A = arithmeticsOf(x, y);
       [x, y] = coerceArguments(A, [x, y])
       return A.add(x, y)
     },
+
+    // this signature is explicitly required by Matrix
+    // once matrices can do type arithmetics, it can be removed
+    'number, number': addNumber,
 
     'BigNumber, BigNumber': function (x, y) {
       return x.plus(y)
