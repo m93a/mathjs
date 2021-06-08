@@ -4,8 +4,8 @@ import Quaternion from '@m93a/quaternion.js'
 
 const { abs, log, exp } = math
 
-describe('arithmetic types', () => {
-  it('supports basic functions on Quaternion.js', () => {
+describe('arithmetic types', function () {
+  it('supports basic functions on Quaternion.js', function () {
     const q = Quaternion(1, 2, 3, 4)
 
     approx.deepEqual(abs(q), 5.477225575051661)
