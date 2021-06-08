@@ -4,9 +4,13 @@ import { factory } from '../../utils/factory.js'
 const name = 'BigNumber'
 const dependencies = ['?on', 'config']
 
+let i = 1
+
 export const createBigNumberClass = /* #__PURE__ */ factory(name, dependencies, ({ on, config }) => {
   const EUCLID = 9 // Use euclidian division for mod calculation
   const BigNumber = Decimal.clone({ precision: config.precision, modulo: EUCLID })
+
+  console.log(`Constructing BigNumber for the ${i++}th time.`)
 
   /**
    * Attach type information
