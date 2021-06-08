@@ -92,19 +92,19 @@ describe('addScalar', function () {
   it('should add strings to BigNumbers', function () {
     assert.deepStrictEqual(add('2', math.bignumber(3)), math.bignumber(5))
     assert.deepStrictEqual(add(math.bignumber(3), '2'), math.bignumber(5))
-    assert.throws(function () { add('foo', math.bignumber(3)) }, /Error: Cannot convert "foo" to BigNumber/)
+    assert.throws(function () { add('foo', math.bignumber(3)) }, /Error: Cannot convert "foo" to/)
   })
 
   it('should add strings to Fractions', function () {
     assert.deepStrictEqual(add('2', math.fraction(3)), math.fraction(5))
     assert.deepStrictEqual(add(math.fraction(3), '2'), math.fraction(5))
-    assert.throws(function () { add('foo', math.fraction(3)) }, /Error: Cannot convert "foo" to Fraction/)
+    assert.throws(function () { add('foo', math.fraction(3)) }, /Error: Cannot convert "foo" to/)
   })
 
   it('should add strings to Complex numbers', function () {
     assert.deepStrictEqual(add('2', math.complex(0, 3)), math.complex(2, 3))
     assert.deepStrictEqual(add(math.complex(0, 3), '2'), math.complex(2, 3))
-    assert.throws(function () { add('foo', math.complex(0, 3)) }, /Error: Cannot convert "foo" to Complex/)
+    assert.throws(function () { add('foo', math.complex(0, 3)) }, /Error: Cannot convert "foo" to/)
   })
   it('should throw an error in case of invalid number of arguments', function () {
     assert.throws(function () { add(1) }, /TypeError: Too few arguments/)
