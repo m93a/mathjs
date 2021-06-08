@@ -16,7 +16,7 @@
 // import { symbols as S } from 'arithmetic-types'
 // however because of the building/testing system in math.js,
 // it is literally impossible to import anything in this file
-const S = {
+export const S = {
   Arithmetics: Symbol.for('arithmetics'),
   AdditiveGroup: Symbol.for('arithmetics-additive-group'),
   VectorSpace: Symbol.for('arithmetics-vector-space'),
@@ -188,15 +188,15 @@ export function isChain (x) {
 }
 
 export function isArithmeticType (x) {
-  return (x && typeof x[S.Arithmetics] === 'object') || false
+  return isNumber(x) || (!!x && typeof x[S.Arithmetics] === 'object')
 }
 
 export function isAdditiveGroup (x) {
-  return (isArithmeticType(x) && x[S.Arithmetics][S.AdditiveGroup]) || false
+  return isNumber(x) || (isArithmeticType(x) && !!x[S.Arithmetics][S.AdditiveGroup])
 }
 
 export function isNormedDivisionRing (x) {
-  return (isArithmeticType(x) && x[S.Arithmetics][S.NormedDivisionRing]) || false
+  return isNumber(x) || (isArithmeticType(x) && !!x[S.Arithmetics][S.NormedDivisionRing])
 }
 
 export function typeOf (x) {

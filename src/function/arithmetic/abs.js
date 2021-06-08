@@ -1,6 +1,7 @@
 import { factory } from '../../utils/factory.js'
 import { deepMap } from '../../utils/collection.js'
 import { absNumber } from '../../plain/number/index.js'
+import { arithmeticsOf } from '../../type/arithmeticsOf.js'
 
 const name = 'abs'
 const dependencies = ['typed']
@@ -31,17 +32,12 @@ export const createAbs = /* #__PURE__ */ factory(name, dependencies, ({ typed })
    *            Absolute value of `x`
    */
   return typed(name, {
-    number: absNumber,
-
-    Complex: function (x) {
-      return x.abs()
+    NormedDivisionRing: function (x) {
+      const A = arithmeticsOf(x)
+      return A.norm(x)
     },
 
     BigNumber: function (x) {
-      return x.abs()
-    },
-
-    Fraction: function (x) {
       return x.abs()
     },
 

@@ -159,6 +159,53 @@ export const createTyped = /* #__PURE__ */ factory('typed', dependencies, functi
 
   typed.conversions = [
     {
+      from: 'NormedDivisionRing',
+      to: 'AdditiveGroup',
+      convert: x => x
+    },
+    {
+      from: 'number',
+      to: 'AdditiveGroup',
+      convert: x => x
+    },
+    {
+      from: 'number',
+      to: 'NormedDivisionRing',
+      convert: x => x
+    },
+    {
+      from: 'boolean',
+      to: 'AdditiveGroup',
+      convert: x => +x
+    },
+    {
+      from: 'boolean',
+      to: 'NormedDivisionRing',
+      convert: x => +x
+    },
+    {
+      from: 'string',
+      to: 'AdditiveGroup',
+      convert: function (x) {
+        const n = Number(x)
+        if (isNaN(n)) {
+          throw new Error('Cannot convert "' + x + '" to a number')
+        }
+        return n
+      }
+    },
+    {
+      from: 'string',
+      to: 'NormedDivisionRing',
+      convert: function (x) {
+        const n = Number(x)
+        if (isNaN(n)) {
+          throw new Error('Cannot convert "' + x + '" to a number')
+        }
+        return n
+      }
+    },
+    {
       from: 'number',
       to: 'BigNumber',
       convert: function (x) {
