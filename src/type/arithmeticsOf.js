@@ -13,7 +13,7 @@ function getArithmetics (x) {
 
 export function arithmeticsOf (...args) {
   // unique arithmetics
-  let uA = [...new Set(args.map(getArithmetics))]
+  const uA = [...new Set(args.map(getArithmetics))]
 
   if (uA.length === 0) throw new TypeError('Expected at least 1 argument')
   if (uA.length === 1) return uA[0]
