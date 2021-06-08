@@ -1,6 +1,7 @@
 import { factory } from '../../utils/factory.js'
 import { deepMap } from '../../utils/collection.js'
-import { logNumber } from '../../plain/number/index.js'
+import { arithmeticsOf } from '../../type/arithmeticsOf.js'
+import { S } from '../../utils/is.js'
 
 const name = 'log'
 const dependencies = ['config', 'typed', 'divideScalar', 'Complex']
@@ -41,17 +42,17 @@ export const createLog = /* #__PURE__ */ factory(name, dependencies, ({ typed, c
    *            Returns the logarithm of `x`
    */
   return typed(name, {
-    number: function (x) {
-      if (x >= 0 || config.predictable) {
-        return logNumber(x)
-      } else {
-        // negative value -> complex value computation
-        return new Complex(x, 0).log()
-      }
-    },
+    NormedDivisionRing: function (x) {
+      const A = arithmeticsOf(x)
 
-    Complex: function (x) {
-      return x.log()
+      if (A[S.Real] && !config.predictable) {
+        const n = A.toNumber(x)
+        if (n < 0) {
+          return new Complex(n, 0).log()
+        }
+      }
+
+      return A.log(x)
     },
 
     BigNumber: function (x) {

@@ -26,9 +26,9 @@
   ],
   "dependencies": {
     "@babel/runtime": "^7.14.0",
-    "@m93a/arithmetic-types": "^0.0.10",
-    "@m93a/complex.js": "^0.0.1",
-    "@m93a/fraction.js": "^0.0.2",
+    "@m93a/arithmetic-types": "^0.0.11",
+    "@m93a/complex.js": "^0.0.2",
+    "@m93a/fraction.js": "^0.0.3",
     "decimal.js": "^10.2.1",
     "escape-latex": "^1.2.0",
     "javascript-natural-sort": "^0.7.1",

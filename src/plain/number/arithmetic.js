@@ -26,9 +26,11 @@ export const NumberArithmetics = {
   neg: unaryMinusNumber,
   inv: x => 1 / x,
 
+  pow: powNumber,
   exp: expNumber,
   expm1: expm1Number,
-  pow: powNumber,
+  log: logNumber,
+  log1p: log1pNumber,
 
   norm: normNumber,
   normSq: squareNumber,
@@ -37,6 +39,12 @@ export const NumberArithmetics = {
   isNaN: x => Number.isNaN(x),
   equals: (a, b) => a === b,
   approximatelyEquals: (a, b, epsilon) => Math.abs(a - b) < epsilon,
+
+  compare: (a, b) => a < b ? -1 : a > b ? 1 : 0,
+  lt: (a, b) => a < b,
+  lte: (a, b) => a <= b,
+  gte: (a, b) => a >= b,
+  gt: (a, b) => a > b,
 
   fromReal: noop,
   fromNumber: noop,

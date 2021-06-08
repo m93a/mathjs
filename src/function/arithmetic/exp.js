@@ -1,6 +1,6 @@
 import { factory } from '../../utils/factory.js'
 import { deepMap } from '../../utils/collection.js'
-import { expNumber } from '../../plain/number/index.js'
+import { arithmeticsOf } from '../../type/arithmeticsOf.js'
 
 const name = 'exp'
 const dependencies = ['typed']
@@ -35,10 +35,9 @@ export const createExp = /* #__PURE__ */ factory(name, dependencies, ({ typed })
    * @return {number | BigNumber | Complex | Array | Matrix} Exponent of `x`
    */
   return typed(name, {
-    number: expNumber,
-
-    Complex: function (x) {
-      return x.exp()
+    NormedDivisionRing: function (x) {
+      const A = arithmeticsOf(x)
+      return A.exp(x)
     },
 
     BigNumber: function (x) {
